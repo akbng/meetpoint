@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv-flow").config();
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -16,6 +16,7 @@ dbConnection.on("error", (err) =>
   console.log(`Error Connecting DATABASE: ${err}`)
 );
 dbConnection.once("open", () => console.log("DATABASE CONNECTED"));
+
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
