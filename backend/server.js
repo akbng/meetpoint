@@ -4,6 +4,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const busboy = require("connect-busboy");
+const {
+  generateRtcToken,
+  generateRtmToken,
+} = require("./utils/generateTokens");
 
 const app = express();
 const port = process.env.PORT || 9000;
@@ -24,6 +28,14 @@ app.use(busboy({ highWaterMark: 2 * 1024 * 1024 }));
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");
+});
+
+app.get("/generate/token", (req, res) => {
+  const { uid, channel, type } = req.query;
+  const options = { rtc: generateRtcToken, rtm: generateRtmToken };
+  options[type](channel, uid)
+    .then((token) => res.status(200).json({ error: false, data: token }))
+    .catch((err) => res.status(400).json({ error: true, reason: err.message }));
 });
 
 app.listen(port, (err) => {
