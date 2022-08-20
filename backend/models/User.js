@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 const { v4: uuidv4 } = require("uuid");
+const { ObjectId } = mongoose.Types;
 
 const userSchema = new mongoose.Schema(
   {
@@ -34,6 +35,29 @@ const userSchema = new mongoose.Schema(
       trim: true,
       maxLength: 10,
     },
+    subscription: {
+      type: String,
+      enum: ["free", "premium", "trial"],
+      default: "free",
+    },
+    connections: [
+      {
+        type: ObjectId,
+        ref: "User",
+      },
+    ],
+    events: [
+      {
+        type: ObjectId,
+        ref: "Event",
+      },
+    ],
+    notes: [
+      {
+        type: ObjectId,
+        ref: "Note",
+      },
+    ],
   },
   { timestamps: true }
 );
