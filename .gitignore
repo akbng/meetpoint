@@ -13,3 +13,6 @@ private*.pem
 public*.pem
 private*.key
 public*.key
+
+# temp files
+*.tmp*
