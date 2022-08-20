@@ -7,3 +7,9 @@ node_modules
 .env.test.local
 .env.production.local
 .env.local
+
+# rsa keys
+private*.pem
+public*.pem
+private*.key
+public*.key
