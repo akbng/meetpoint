@@ -1,4 +1,4 @@
-const { AccessToken, ServiceRtm } = require("./index");
+const { AccessToken, ServiceRtm } = require("./AccessToken");
 
 const Role = {
   Rtm_User: 1,

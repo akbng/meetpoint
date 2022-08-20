@@ -1,42 +1,41 @@
-const {
-  AccessToken,
-  ServiceRtc,
-  ServiceRtm,
-  ServiceFpa,
-  ServiceChat,
-  ServiceEducation,
-  kRtcServiceType,
-  kRtmServiceType,
-  kFpaServiceType,
-  kChatServiceType,
-  kEducationServiceType,
-} = require("./AccessToken");
+const AccessToken = require("./AccessToken").AccessToken;
+const ServiceRtc = require("./AccessToken").ServiceRtc;
+const ServiceRtm = require("./AccessToken").ServiceRtm;
+const ServiceFpa = require("./AccessToken").ServiceFpa;
+const ServiceChat = require("./AccessToken").ServiceChat;
+const ServiceEducation = require("./AccessToken").ServiceEducation;
+const kRtcServiceType = require("./AccessToken").kRtcServiceType;
+const kRtmServiceType = require("./AccessToken").kRtmServiceType;
+const kFpaServiceType = require("./AccessToken").kFpaServiceType;
+const kChatServiceType = require("./AccessToken").kChatServiceType;
+const kEducationServiceType = require("./AccessToken").kEducationServiceType;
 const generateJwt = require("./generateJwt");
 const generateRsaKeyPair = require("./generateRsaKeyPair");
-const { generateRtcToken, generateRtmToken } = require("./generateTokens");
+const generateRtcToken = require("./generateTokens").generateRtcToken;
+const generateRtmToken = require("./generateTokens").generateRtmToken;
 const makeObject = require("./makeObject");
-const { RtcTokenBuilder, RtcRole } = require("./RtcTokenBuilder");
-const { RtmTokenBuilder, RtmRole } = require("./RtmTokenBuilder");
+const RtcTokenBuilder = require("./RtcTokenBuilder").RtcTokenBuilder;
+const RtmTokenBuilder = require("./RtmTokenBuilder").RtmTokenBuilder;
+const RtcRole = require("./RtcTokenBuilder").RtcRole;
+const RtmRole = require("./RtmTokenBuilder").RtmRole;
 
-module.exports = {
-  AccessToken,
-  ServiceRtc,
-  ServiceRtm,
-  ServiceFpa,
-  ServiceChat,
-  ServiceEducation,
-  kRtcServiceType,
-  kRtmServiceType,
-  kFpaServiceType,
-  kChatServiceType,
-  kEducationServiceType,
-  generateJwt,
-  generateRsaKeyPair,
-  generateRtcToken,
-  generateRtmToken,
-  makeObject,
-  RtcTokenBuilder,
-  RtcRole,
-  RtmTokenBuilder,
-  RtmRole,
-};
+module.exports.AccessToken = AccessToken;
+module.exports.ServiceRtc = ServiceRtc;
+module.exports.ServiceRtm = ServiceRtm;
+module.exports.ServiceFpa = ServiceFpa;
+module.exports.ServiceChat = ServiceChat;
+module.exports.ServiceEducation = ServiceEducation;
+module.exports.kRtcServiceType = kRtcServiceType;
+module.exports.kRtmServiceType = kRtmServiceType;
+module.exports.kFpaServiceType = kFpaServiceType;
+module.exports.kChatServiceType = kChatServiceType;
+module.exports.kEducationServiceType = kEducationServiceType;
+module.exports.generateJwt = generateJwt;
+module.exports.generateRsaKeyPair = generateRsaKeyPair;
+module.exports.generateRtcToken = generateRtcToken;
+module.exports.generateRtmToken = generateRtmToken;
+module.exports.makeObject = makeObject;
+module.exports.RtcTokenBuilder = RtcTokenBuilder;
+module.exports.RtmTokenBuilder = RtmTokenBuilder;
+module.exports.RtcRole = RtcRole;
+module.exports.RtmRole = RtmRole;

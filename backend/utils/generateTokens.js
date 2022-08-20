@@ -1,11 +1,6 @@
 const crypto = require("crypto");
-
-const {
-  RtcTokenBuilder,
-  RtmTokenBuilder,
-  RtcRole,
-  RtmRole,
-} = require("./index");
+const { RtcTokenBuilder, RtcRole } = require("./RtcTokenBuilder");
+const { RtmTokenBuilder, RtmRole } = require("./RtmTokenBuilder");
 
 const randUint32 = () => crypto.randomBytes(4).readUInt32LE(0, true);
 
