@@ -12,6 +12,16 @@ const {
 
 router.post(
   "/login",
+  body("email").isEmail().trim().withMessage("Please enter a valid email"),
+  body("password")
+    .isStrongPassword()
+    .withMessage("Password must be strong & at least 8 characters long"),
+  validateResult,
+  login
+);
+
+router.post(
+  "/register",
   body("email")
     .isEmail()
     .withMessage("Please enter a valid email")
@@ -20,21 +30,11 @@ router.post(
         (user) => user && Promise.reject("Email already in use!")
       );
     })
-    .normalizeEmail()
-    .trim(),
+    .trim()
+    .normalizeEmail(),
   body("password")
     .isStrongPassword()
-    .withMessage("Password must be at least 8 characters long"),
-  validateResult,
-  login
-);
-
-router.post(
-  "/register",
-  body("email").isEmail().withMessage("Please enter a valid email").trim(),
-  body("password")
-    .isStrongPassword()
-    .withMessage("Password must be at least 6 characters long"),
+    .withMessage("Password must be strong & at least 8 characters long"),
   validateResult,
   register
 );
