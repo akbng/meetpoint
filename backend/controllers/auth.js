@@ -11,7 +11,7 @@ const validateResult = (req, res, next) => {
   if (!errors.isEmpty())
     return res.status(400).json({
       error: true,
-      reason: errors.array(),
+      reason: errors.array()[0].msg,
     });
 
   next();

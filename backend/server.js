@@ -29,7 +29,7 @@ app.use(busboy({ highWaterMark: 2 * 1024 * 1024 }));
 initializePassport(passport);
 app.use(passport.initialize());
 
-app.use("/api", authRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");
@@ -42,6 +42,19 @@ app.get("/generate/token", (req, res) => {
     .then((token) => res.status(200).json({ error: false, data: token }))
     .catch((err) => res.status(400).json({ error: true, reason: err.message }));
 });
+
+// Example of protected route
+// app.get(
+//   "/protected",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res, next) => {
+//     res.status(200).json({
+//       error: false,
+//       msg: "You are successfully authenticated to this route!",
+//       data: req.user,
+//     });
+//   }
+// );
 
 app.listen(port, (err) => {
   if (err) console.error("Something went wrong starting the Server", err);
