@@ -4,12 +4,16 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const busboy = require("connect-busboy");
 const path = require("path");
+const passport = require("passport");
 
 const {
   generateRtcToken,
   generateRtmToken,
 } = require("./utils/generateTokens");
 const generateRsaKeyPair = require("./utils/generateRsaKeyPair");
+const initializePassport = require("./config/passport");
+// api routes
+const authRoutes = require("./routes/auth");
 
 // connect to database
 require("./config/database");
@@ -21,6 +25,11 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(busboy({ highWaterMark: 2 * 1024 * 1024 }));
+
+initializePassport(passport);
+app.use(passport.initialize());
+
+app.use("/api", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");
