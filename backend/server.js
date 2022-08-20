@@ -9,8 +9,8 @@ const passport = require("passport");
 const {
   generateRtcToken,
   generateRtmToken,
-} = require("./utils/generateTokens");
-const generateRsaKeyPair = require("./utils/generateRsaKeyPair");
+  generateRsaKeyPair,
+} = require("./utils");
 const initializePassport = require("./config/passport");
 // api routes
 const authRoutes = require("./routes/auth");

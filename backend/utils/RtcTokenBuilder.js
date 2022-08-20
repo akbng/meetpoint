@@ -1,4 +1,4 @@
-const { AccessToken, ServiceRtc } = require("./AccessToken");
+const { AccessToken, ServiceRtc } = require("./index");
 
 const Role = {
   // for live broadcaster

@@ -2,8 +2,7 @@ const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
 const { User } = require("../models/User");
-const generateJwt = require("../utils/generateJwt");
-const makeObject = require("../utils/makeObject");
+const { generateJwt, makeObject } = require("../utils");
 
 const cookieExpiryMs = Date.now() + 6 * 60 * 60 * 1000;
 
