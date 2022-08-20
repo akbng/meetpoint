@@ -68,8 +68,8 @@ userSchema
     return this.name.first + " " + this.name?.last;
   })
   .set(function (fullName) {
-    this.name.first = fullName.substr(0, fullName.indexOf(" "));
-    this.name.last = fullName.substr(fullName.lastIndexOf(" ") + 1);
+    this.name.first = fullName.trim().substr(0, fullName.indexOf(" "));
+    this.name.last = fullName.trim().substr(fullName.lastIndexOf(" ") + 1);
   });
 
 userSchema

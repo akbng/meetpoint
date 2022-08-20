@@ -5,6 +5,8 @@ const { User } = require("../models/User");
 const generateJwt = require("../utils/generateJwt");
 const makeObject = require("../utils/makeObject");
 
+const cookieExpiryMs = Date.now() + 6 * 60 * 60 * 1000;
+
 const validateResult = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
@@ -33,7 +35,7 @@ const register = async (req, res) => {
     const newUser = await user.save({ validateBeforeSave: true });
     // issue a token for the new user
     const token = generateJwt(newUser);
-    res.cookie("token", { ...token }, { expire: new Date() + 2160 });
+    res.cookie("token", token.token, { expire: cookieExpiryMs });
     // hide the sensitive information
     newUser.hashed_password = undefined;
     newUser.salt = undefined;
@@ -73,7 +75,7 @@ const login = async (req, res) => {
       });
     // issue a token for the user
     const token = generateJwt(user);
-    res.cookie("token", { ...token }, { expire: new Date() + 2160 });
+    res.cookie("token", token.token, { expire: cookieExpiryMs });
     // hide the sensitive information
     user.hashed_password = undefined;
     user.salt = undefined;
