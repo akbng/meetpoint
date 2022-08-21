@@ -1,5 +1,10 @@
+const backendURL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_PROD_BACKEND_URL
+    : process.env.REACT_APP_DEV_BACKEND_URL;
+
 export const registerUser = ({ fullName, email, password, phone }) =>
-  fetch("http://localhost:9000/api/auth/register", {
+  fetch(`${backendURL}/auth/register`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -9,7 +14,7 @@ export const registerUser = ({ fullName, email, password, phone }) =>
   }).then((res) => res.json());
 
 export const loginUser = ({ email, password }) =>
-  fetch("http://localhost:9000/api/auth/login", {
+  fetch(`${backendURL}/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
