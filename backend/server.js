@@ -29,7 +29,8 @@ app.use(busboy({ highWaterMark: 2 * 1024 * 1024 }));
 initializePassport(passport);
 app.use(passport.initialize());
 
-app.use("/api/auth", authRoutes);
+const apiPrefix = "/api/v1";
+app.use(apiPrefix + "/auth", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");
