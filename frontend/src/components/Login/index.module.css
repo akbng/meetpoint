@@ -1,0 +1,71 @@
+.container {
+  left: 0;
+  width: 50%;
+  z-index: 2;
+}
+
+.container.active {
+  transform: translateX(100%);
+}
+
+.form {
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 50px;
+  height: 100%;
+  text-align: center;
+}
+
+.user_input {
+  background-color: #e5e5e5;
+  padding: 12px 15px;
+  margin: 8px 0;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.text_small {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.link {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+.button {
+  border: none;
+  border-radius: 3.2rem;
+  background: linear-gradient(15deg, #115e59 0%, #14b8a6 100%);
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 80ms ease-in;
+  cursor: pointer;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.button:focus {
+  outline: none;
+}
+
+/* TODO: on hover create a glow effect */
