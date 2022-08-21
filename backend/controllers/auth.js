@@ -1,5 +1,4 @@
 const { validationResult } = require("express-validator");
-const jwt = require("jsonwebtoken");
 
 const { User } = require("../models/User");
 const { generateJwt, makeObject } = require("../utils");
