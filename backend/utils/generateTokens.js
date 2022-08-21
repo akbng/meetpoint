@@ -21,11 +21,11 @@ const generateRtcToken = (Channel, Uid) =>
 
     const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
 
-    const token = RtcTokenBuilder.buildTokenWithUid(
+    const token = RtcTokenBuilder.buildTokenWithUserAccount(
       appID,
       appCertificate,
       channelName,
-      parseInt(uid),
+      uid.toString(),
       role,
       privilegeExpiredTs
     );
