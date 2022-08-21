@@ -1,3 +1,5 @@
+import { isAuthenticated } from "../utils";
+
 const backendURL =
   process.env.NODE_ENV === "production"
     ? process.env.REACT_APP_PROD_BACKEND_URL
@@ -24,4 +26,12 @@ export const loginUser = ({ email, password }) =>
       email,
       password,
     }),
+  }).then((res) => res.json());
+
+export const getRtcToken = ({ channelName }) =>
+  fetch(`${backendURL}/auth/generate/token/rtc/user?channel=${channelName}`, {
+    method: "GET",
+    headers: {
+      Authorization: isAuthenticated().token,
+    },
   }).then((res) => res.json());
