@@ -101,6 +101,20 @@
   transform: translateX(20%);
 }
 
+.text {
+  font-size: 14px;
+  font-weight: 100;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  margin: 20px 0 30px;
+}
+
+.header {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
 .button {
   border-radius: 35px;
   color: #ffffff;
