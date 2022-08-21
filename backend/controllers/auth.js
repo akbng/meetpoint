@@ -1,7 +1,13 @@
 const { validationResult } = require("express-validator");
+const { v4: uuidv4 } = require("uuid");
 
 const { User } = require("../models/User");
-const { generateJwt, makeObject } = require("../utils");
+const {
+  generateJwt,
+  makeObject,
+  generateRtcToken,
+  generateRtmToken,
+} = require("../utils");
 
 const cookieExpiryMs = Date.now() + 6 * 60 * 60 * 1000;
 
@@ -102,4 +108,65 @@ const logout = (req, res) => {
   });
 };
 
-module.exports = { validateResult, register, login, logout };
+const generateRtcUserToken = async (req, res) => {
+  const { channel } = req.query;
+  const channelName = channel || uuidv4();
+  try {
+    const data = await generateRtcToken(channelName, req.user._id);
+    return res
+      .status(200)
+      .json({ error: false, data: { channelName, ...data } });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: true, reason: err.reason || err.message });
+  }
+};
+
+const generateRtcGuestToken = async (req, res) => {
+  const { channel } = req.query;
+  const channelName = channel || uuidv4();
+  try {
+    const data = await generateRtcToken(channelName);
+    return res
+      .status(200)
+      .json({ error: false, data: { channelName, ...data } });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: true, reason: err.reason || err.message });
+  }
+};
+
+const generateRtmUserToken = async (req, res) => {
+  try {
+    const data = await generateRtmToken(req.user._id);
+    return res.status(200).json({ error: false, data: data });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: true, reason: err.reason || err.message });
+  }
+};
+
+const generateRtmGuestToken = async (req, res) => {
+  try {
+    const data = await generateRtmToken();
+    return res.status(200).json({ error: false, data: data });
+  } catch (err) {
+    return res
+      .status(400)
+      .json({ error: true, reason: err.reason || err.message });
+  }
+};
+
+module.exports = {
+  validateResult,
+  register,
+  login,
+  logout,
+  generateRtcUserToken,
+  generateRtcGuestToken,
+  generateRtmUserToken,
+  generateRtmGuestToken,
+};
