@@ -1,0 +1,23 @@
+.social_container {
+  margin: 20px 0;
+}
+
+.social {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 5px;
+  height: 40px;
+  width: 40px;
+  font-size: 0.9rem;
+  border-radius: 50%;
+  transition: 80ms ease-in;
+  border: 1px solid #dddddd;
+  color: #333;
+}
+
+.social:hover {
+  border: 1px solid #115e59;
+  background-color: #115e59;
+  color: #ffffff;
+}
