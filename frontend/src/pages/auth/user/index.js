@@ -11,7 +11,7 @@ const Auth = () => {
   const [rightPanelActive, setRightPanelActive] = useState(true);
 
   useEffect(() => {
-    if (isAuthenticated()) navigate("/dashboard", { replace: true });
+    if (isAuthenticated()) navigate("/dashboard/me", { replace: true });
   }, []);
 
   return (

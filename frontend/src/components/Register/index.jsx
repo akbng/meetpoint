@@ -46,7 +46,7 @@ const Register = ({ className, active }) => {
         sub: response.data?.user?._id,
       });
 
-      if (isAuthenticated()) navigate("/dashboard");
+      if (isAuthenticated()) navigate("/dashboard/me");
     } catch (err) {
       console.error(err);
       setError(err.reason);
