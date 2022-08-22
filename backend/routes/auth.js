@@ -9,10 +9,9 @@ const {
   validateResult,
   logout,
   login,
-  generateRtcUserToken,
   generateRtmUserToken,
-  generateRtcGuestToken,
   generateRtmGuestToken,
+  generateRtcAuthToken,
 } = require("../controllers/auth");
 
 router.post(
@@ -47,18 +46,15 @@ router.post(
 router.get("/signout", logout);
 
 router.get(
-  "/generate/token/rtc/user",
+  "/generate/token/rtc",
   passport.authenticate("jwt", { session: false }),
-  generateRtcUserToken
+  generateRtcAuthToken
 );
 
 router.get(
-  "/generate/token/rtm/user",
+  "/generate/token/rtm",
   passport.authenticate("jwt", { session: false }),
   generateRtmUserToken
 );
-
-router.get("/generate/token/rtc/guest", generateRtcGuestToken);
-router.get("/generate/token/rtm/guest", generateRtmGuestToken);
 
 module.exports = router;

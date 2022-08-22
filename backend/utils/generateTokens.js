@@ -1,8 +1,5 @@
-const crypto = require("crypto");
 const { RtcTokenBuilder, RtcRole } = require("./RtcTokenBuilder");
 const { RtmTokenBuilder, RtmRole } = require("./RtmTokenBuilder");
-
-const randUint32 = () => crypto.randomBytes(4).readUInt32LE(0, true);
 
 const appID = process.env.APP_ID;
 const appCertificate = process.env.APP_CERTIFICATE;
@@ -12,7 +9,7 @@ const generateRtcToken = (Channel, Uid) =>
     if (!Channel) reject(Error("Channel Name is required"));
 
     const channelName = Channel;
-    const uid = Uid || randUint32();
+    const uid = Uid || 0;
     const role = RtcRole.PUBLISHER;
 
     const expirationTimeInSeconds = 3600; // 1 hour
@@ -25,7 +22,7 @@ const generateRtcToken = (Channel, Uid) =>
       appID,
       appCertificate,
       channelName,
-      uid.toString(),
+      uid,
       role,
       privilegeExpiredTs
     );
@@ -35,10 +32,11 @@ const generateRtcToken = (Channel, Uid) =>
 
 const generateRtmToken = (Uid) =>
   new Promise((resolve, _) => {
-    const uid = Uid || randUint32();
+    if (!Uid) reject(Error("User ID is required"));
 
     const expirationTimeInSeconds = 3600;
     const currentTimestamp = Math.floor(Date.now() / 1000);
+    const uid = Uid;
 
     const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
 

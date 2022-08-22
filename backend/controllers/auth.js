@@ -108,22 +108,7 @@ const logout = (req, res) => {
   });
 };
 
-const generateRtcUserToken = async (req, res) => {
-  const { channel } = req.query;
-  const channelName = channel || uuidv4();
-  try {
-    const data = await generateRtcToken(channelName, req.user._id);
-    return res
-      .status(200)
-      .json({ error: false, data: { channelName, ...data } });
-  } catch (err) {
-    return res
-      .status(400)
-      .json({ error: true, reason: err.reason || err.message });
-  }
-};
-
-const generateRtcGuestToken = async (req, res) => {
+const generateRtcAuthToken = async (req, res) => {
   const { channel } = req.query;
   const channelName = channel || uuidv4();
   try {
@@ -165,8 +150,7 @@ module.exports = {
   register,
   login,
   logout,
-  generateRtcUserToken,
-  generateRtcGuestToken,
+  generateRtcAuthToken,
   generateRtmUserToken,
   generateRtmGuestToken,
 };
