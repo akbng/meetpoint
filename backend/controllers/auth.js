@@ -134,17 +134,6 @@ const generateRtmUserToken = async (req, res) => {
   }
 };
 
-const generateRtmGuestToken = async (req, res) => {
-  try {
-    const data = await generateRtmToken();
-    return res.status(200).json({ error: false, data: data });
-  } catch (err) {
-    return res
-      .status(400)
-      .json({ error: true, reason: err.reason || err.message });
-  }
-};
-
 module.exports = {
   validateResult,
   register,
@@ -152,5 +141,4 @@ module.exports = {
   logout,
   generateRtcAuthToken,
   generateRtmUserToken,
-  generateRtmGuestToken,
 };

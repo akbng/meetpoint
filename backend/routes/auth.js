@@ -10,7 +10,6 @@ const {
   logout,
   login,
   generateRtmUserToken,
-  generateRtmGuestToken,
   generateRtcAuthToken,
 } = require("../controllers/auth");
 
