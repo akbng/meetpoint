@@ -8,9 +8,10 @@ const PRIV_KEY = fs.readFileSync(pathToPrivKey, "utf8");
 function generateJwt(user) {
   const { _id } = user;
   const expiresIn = "6h";
+  const issuedAt = Math.floor(Date.now() / 1000);
   const payload = {
     sub: _id,
-    iat: Math.floor(Date.now() / 1000),
+    iat: issuedAt,
   };
 
   const signedToken = jwt.sign(payload, PRIV_KEY, {
@@ -20,7 +21,7 @@ function generateJwt(user) {
 
   return {
     token: "Bearer " + signedToken,
-    expires: expiresIn,
+    expires: issuedAt + parseInt(expiresIn.split("h")[0]) * 60 * 60,
   };
 }
 
