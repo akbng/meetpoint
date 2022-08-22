@@ -29,7 +29,7 @@ export const loginUser = ({ email, password }) =>
   }).then((res) => res.json());
 
 export const getRtcToken = ({ channelName }) =>
-  fetch(`${backendURL}/auth/generate/token/rtc/user?channel=${channelName}`, {
+  fetch(`${backendURL}/auth/generate/token/rtc?channel=${channelName}`, {
     method: "GET",
     headers: {
       Authorization: isAuthenticated().token,
