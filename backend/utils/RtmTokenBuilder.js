@@ -1,4 +1,4 @@
-const { AccessToken, ServiceRtm } = require("./AccessToken");
+const { AccessToken, Priviledges } = require("./OldAccessToken");
 
 const Role = {
   Rtm_User: 1,
@@ -19,13 +19,9 @@ class RtmTokenBuilder {
    * @return token
    */
   static buildToken(appID, appCertificate, account, role, privilegeExpiredTs) {
-    let token = new AccessToken(appID, appCertificate, account, 0);
-
-    let serviceRtm = new ServiceRtm(account);
-    serviceRtm.add_privilege(serviceRtm.kPrivilegeLogin, privilegeExpiredTs);
-    token.add_service(serviceRtm);
-
-    return token.build();
+    const key = new AccessToken(appID, appCertificate, account, "");
+    key.addPriviledge(Priviledges.kRtmLogin, privilegeExpiredTs);
+    return key.build();
   }
 }
 
