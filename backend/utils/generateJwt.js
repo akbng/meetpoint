@@ -10,7 +10,7 @@ function generateJwt(user) {
   const expiresIn = "6h";
   const payload = {
     sub: _id,
-    iat: Date.now(),
+    iat: Math.floor(Date.now() / 1000),
   };
 
   const signedToken = jwt.sign(payload, PRIV_KEY, {
