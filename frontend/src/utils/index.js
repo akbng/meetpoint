@@ -6,5 +6,7 @@ export const authenticate = (token) => {
 
 export const isAuthenticated = () => {
   if (typeof window == "undefined") return false;
-  return JSON.parse(localStorage.getItem("token"));
+  const data = JSON.parse(localStorage.getItem("token"));
+  if (data && data.expiry * 1000 > Date.now()) return data;
+  else return false;
 };
