@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import MeetingPreview from "../../../components/MeetingPreview";
 
+import MeetingPreview from "../../../components/MeetingPreview";
+import VideoCall from "../../../components/VideoCall";
 import { useMicrophoneAndCameraTracks } from "../../../config";
 import { getRtcToken } from "../../../helper";
 
@@ -20,16 +21,23 @@ const Meeting = () => {
 
   return (
     <div className="container">
-      {inCall ? (
-        "MEETing STARTED"
-      ) : (
-        <MeetingPreview
-          ready={ready}
-          tracks={tracks}
-          token={token}
-          setStartCall={setInCall}
-        />
-      )}
+      <div className="App">
+        {inCall ? (
+          <VideoCall
+            ready={ready}
+            setInCall={setInCall}
+            token={token}
+            tracks={tracks}
+          />
+        ) : (
+          <MeetingPreview
+            ready={ready}
+            tracks={tracks}
+            token={token}
+            setStartCall={setInCall}
+          />
+        )}
+      </div>
     </div>
   );
 };

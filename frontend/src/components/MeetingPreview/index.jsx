@@ -21,8 +21,8 @@ const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
   }, []);
 
   const mute = (type) => async () => {
-    if (type === "audio") await tracks[0].setEnabled(!trackState[type]);
-    if (type === "video") await tracks[1].setEnabled(!trackState[type]);
+    if (type === "audio") await tracks[0].setEnabled(!trackState.audio);
+    if (type === "video") await tracks[1].setEnabled(!trackState.video);
     setTrackState({
       ...trackState,
       [type]: !trackState[type],
@@ -40,9 +40,11 @@ const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
       <h1>Preview Call</h1>
       <div className="video_container">
         <h2>Video Feed Here</h2>
-        {ready && tracks && (
-          <AgoraVideoPlayer videoTrack={tracks[1]} className="video" />
-        )}
+        <div id="videos">
+          {ready && tracks[1] && (
+            <AgoraVideoPlayer videoTrack={tracks[1]} className="vid" />
+          )}
+        </div>
       </div>
       {ready && tracks && (
         <div className="video_controls">
