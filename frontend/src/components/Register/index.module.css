@@ -38,11 +38,10 @@
 }
 
 .user_input {
-  background-color: #e5e5e5;
   padding: 12px 15px;
   margin: 8px 0;
   width: 100%;
-  border: none;
+  border: 1px solid #115e59;
   border-radius: 10px;
 }
 

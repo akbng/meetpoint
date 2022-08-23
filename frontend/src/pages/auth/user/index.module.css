@@ -11,6 +11,28 @@
   overflow: hidden;
 }
 
+.outer_container::after {
+  content: "";
+  width: 70vw;
+  height: 70vw;
+  border-radius: 100%;
+  position: absolute;
+  top: 30%;
+  border: 70px solid rgba(17, 94, 89, 0.22);
+  box-sizing: border-box;
+}
+
+.outer_container::before {
+  content: "";
+  width: 90vw;
+  height: 90vw;
+  border-radius: 100%;
+  position: absolute;
+  top: 15%;
+  border: 70px solid rgba(17, 94, 89, 0.22);
+  box-sizing: border-box;
+}
+
 .inner_container {
   background-color: #fff;
   border-radius: 10px;
