@@ -12,12 +12,18 @@
   font-size: 0.9rem;
   border-radius: 50%;
   transition: 80ms ease-in;
-  border: 1px solid #dddddd;
-  color: #333;
+  border: 1px solid #115e59;
+  color: #115e59;
 }
 
 .social:hover {
-  border: 1px solid #115e59;
   background-color: #115e59;
   color: #ffffff;
+  box-shadow: 0 2px 25px rgba(50, 220, 210, 1),
+    0 2px 25px rgba(50, 220, 210, 0.8);
+}
+
+.social:focus {
+  box-shadow: 0 2px 25px rgba(50, 220, 210, 1),
+    0 2px 25px rgba(50, 220, 210, 0.8);
 }

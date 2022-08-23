@@ -1,6 +1,7 @@
 .outer_container {
   background: #f6f5f7;
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -11,24 +12,24 @@
   overflow: hidden;
 }
 
-.outer_container::after {
+.outer_container::before {
   content: "";
-  width: 70vw;
-  height: 70vw;
+  width: 1111px;
+  height: 1111px;
   border-radius: 100%;
   position: absolute;
-  top: 30%;
+  top: 15%;
   border: 70px solid rgba(17, 94, 89, 0.22);
   box-sizing: border-box;
 }
 
-.outer_container::before {
+.outer_container::after {
   content: "";
-  width: 90vw;
-  height: 90vw;
+  width: 870px;
+  height: 870px;
   border-radius: 100%;
   position: absolute;
-  top: 15%;
+  top: 35%;
   border: 70px solid rgba(17, 94, 89, 0.22);
   box-sizing: border-box;
 }
@@ -42,6 +43,7 @@
   width: 100%;
   max-width: 768px;
   min-height: 480px;
+  z-index: 1;
 }
 
 .form_container {
@@ -155,6 +157,7 @@
 
 .button:focus {
   outline: none;
+  box-shadow: 0 2px 25px rgba(255, 255, 255, 1);
 }
 
 .ghost {
@@ -165,4 +168,5 @@
 .ghost:hover {
   background: #ffffff;
   color: #115e59;
+  box-shadow: 0 2px 25px rgba(255, 255, 255, 1);
 }
