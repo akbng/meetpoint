@@ -32,6 +32,11 @@ const eventSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    color: {
+      type: String,
+      enum: ["red", "orange", "yellow", "green", "blue", "purple", "pink"],
+      default: "blue",
+    },
     attendees: [
       {
         user: {
