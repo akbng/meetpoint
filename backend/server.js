@@ -14,6 +14,7 @@ const {
 const initializePassport = require("./config/passport");
 // api routes
 const authRoutes = require("./routes/auth");
+const eventRoutes = require("./routes/event");
 
 // connect to database
 require("./config/database");
@@ -31,6 +32,7 @@ app.use(passport.initialize());
 
 const apiPrefix = "/api/v1";
 app.use(apiPrefix + "/auth", authRoutes);
+app.use(apiPrefix + eventRoutes);
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");
@@ -59,7 +61,7 @@ app.get("/generate/token", (req, res) => {
 
 app.listen(port, (err) => {
   if (err) console.error("Something went wrong starting the Server", err);
-  else console.log(`[**SERVER**] ArtSchool API is running on PORT ${port}`);
+  else console.log(`[**SERVER**] MEETPOINT API is running on PORT ${port}`);
 });
 
 if (process.env.NODE_ENV === "production")
