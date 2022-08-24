@@ -1,0 +1,91 @@
+.dialog_container {
+  position: relative;
+  top: 0;
+  z-index: 50;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+}
+
+.panel_container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.dialog_panel {
+  margin: 0 auto;
+  padding: 0 1.2rem;
+  min-width: 400px;
+  min-height: 250px;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  position: relative;
+}
+
+.close_button {
+  position: absolute;
+  top: 10px;
+  right: 0.8rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  color: rgb(255, 0, 0, 0.8);
+}
+
+.enter {
+  transition-timing-function: ease-out;
+  transition-duration: 300ms;
+}
+
+.enter_from_backdrop {
+  opacity: 0;
+}
+
+.enter_to_backdrop {
+  opacity: 1;
+}
+
+.enter_from_dialog {
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+.enter_to_dialog {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.leave {
+  transition-timing-function: ease-in;
+  transition-duration: 200ms;
+}
+
+.leave_from_backdrop {
+  opacity: 1;
+}
+
+.leave_to_backdrop {
+  opacity: 0;
+}
+
+.leave_from_dialog {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.leave_to_dialog {
+  opacity: 0;
+  transform: scale(0.95);
+}

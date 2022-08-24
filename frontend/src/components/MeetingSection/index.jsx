@@ -5,9 +5,11 @@ import { FaPlus } from "react-icons/fa";
 import { getUpcomingEvents } from "../../helper";
 import UserCalendar from "../UserCalendar";
 import styles from "./index.module.css";
+import EventDialog from "../EventDialog";
 
 const MeetingSection = () => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const init = async () => {
@@ -20,7 +22,7 @@ const MeetingSection = () => {
       }
     };
     init();
-  }, []);
+  }, [isOpen]);
 
   return (
     <div className={styles.container}>
@@ -33,9 +35,15 @@ const MeetingSection = () => {
         </div>
       </div>
       <UserCalendar className={styles.calendar} />
-      <button className={styles.floating_button}>
+      <button
+        className={styles.floating_button}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         <FaPlus />
       </button>
+      <div>
+        <EventDialog isOpen={isOpen} setIsOpen={setIsOpen} />
+      </div>
     </div>
   );
 };

@@ -36,9 +36,7 @@ const getUpcomingEvents = async (req, res) => {
         $gte: currentDate,
         $lt: new Date(currentDate.getFullYear(), currentDate.getMonth() + 2),
       },
-    })
-      .populate("creator", ["_id", "name", "email"])
-      .populate("attendees.user", ["_id", "name", "email"]);
+    }).populate("attendees.user", ["_id", "name", "email"]);
 
     if (events.length === 0)
       return res.status(400).json({
@@ -60,9 +58,10 @@ const getAllEvents = async (req, res) => {
   const user = req.user;
 
   try {
-    const events = await Event.find({ creator: user._id })
-      .populate("creator", ["_id", "name", "email"])
-      .populate("attendees.user", ["_id", "name", "email"]);
+    const events = await Event.find({ creator: user._id }).populate(
+      "attendees.user",
+      ["_id", "name", "email"]
+    );
 
     if (events.length === 0)
       return res.status(400).json({

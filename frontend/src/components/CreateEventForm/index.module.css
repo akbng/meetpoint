@@ -1,0 +1,89 @@
+:root {
+  --blue: #2563eb;
+  --green: #16a34a;
+  --yellow: #eab308;
+  --orange: #f97316;
+  --red: #ef4444;
+  --pink: #ec4899;
+  --purple: #a855f7;
+}
+
+.dialog_title {
+  font-size: 1.2rem;
+  color: #4e4e4e;
+  margin: 10px 0;
+}
+
+.color_swatch {
+  display: inline-block;
+  margin: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  cursor: pointer;
+  transform: scale(0.95);
+  transition: 80ms ease-in;
+}
+
+.blue {
+  background-color: var(--blue);
+}
+
+.green {
+  background-color: var(--green);
+}
+
+.yellow {
+  background-color: var(--yellow);
+}
+
+.orange {
+  background-color: var(--orange);
+}
+
+.red {
+  background-color: var(--red);
+}
+
+.pink {
+  background-color: var(--pink);
+}
+
+.purple {
+  background-color: var(--purple);
+}
+
+.selected_blue > .blue {
+  box-shadow: 0 2px 15px 3px var(--blue);
+  transform: scale(1);
+}
+
+.selected_green > .green {
+  box-shadow: 0 2px 15px 3px var(--green);
+  transform: scale(1);
+}
+
+.selected_yellow > .yellow {
+  box-shadow: 0 2px 15px 3px var(--yellow);
+  transform: scale(1);
+}
+
+.selected_orange > .orange {
+  box-shadow: 0 2px 15px 3px var(--orange);
+  transform: scale(1);
+}
+
+.selected_red > .red {
+  box-shadow: 0 2px 15px 3px var(--red);
+  transform: scale(1);
+}
+
+.selected_pink > .pink {
+  box-shadow: 0 2px 15px 3px var(--pink);
+  transform: scale(1);
+}
+
+.selected_purple > .purple {
+  box-shadow: 0 2px 15px 3px var(--purple);
+  transform: scale(1);
+}

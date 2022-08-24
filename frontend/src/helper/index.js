@@ -46,3 +46,14 @@ export const getUpcomingEvents = () =>
       Authorization: isAuthenticated().token,
     },
   }).then((res) => res.json());
+
+export const createEvent = (values) =>
+  fetch(`${backendURL}/event`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: isAuthenticated().token,
+    },
+    body: JSON.stringify(values),
+  });
