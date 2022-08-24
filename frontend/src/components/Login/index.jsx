@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { loginUser } from "../../helper";
 import { authenticate, isAuthenticated } from "../../utils";
@@ -7,6 +7,7 @@ import SocialLogin from "../SocialLogin";
 import styles from "./index.module.css";
 
 const Login = ({ className, active }) => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [value, setValue] = useState({
     email: "",
@@ -44,7 +45,11 @@ const Login = ({ className, active }) => {
         sub: response.data?.user?._id,
       });
 
-      if (isAuthenticated()) navigate("/dashboard/me");
+      if (isAuthenticated()) {
+        location.state?.from
+          ? navigate(location.state.from)
+          : navigate("/dashboard/me");
+      }
     } catch (err) {
       console.error(err);
       setError(err.reason || err.message);

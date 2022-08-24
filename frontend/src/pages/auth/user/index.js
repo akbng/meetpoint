@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Login from "../../../components/Login";
 import Register from "../../../components/Register";
@@ -7,11 +7,16 @@ import { isAuthenticated } from "../../../utils";
 import styles from "./index.module.css";
 
 const Auth = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const [rightPanelActive, setRightPanelActive] = useState(true);
 
   useEffect(() => {
-    if (isAuthenticated()) navigate("/dashboard/me", { replace: true });
+    if (isAuthenticated()) {
+      location.state?.from
+        ? navigate(location.state.from)
+        : navigate("/dashboard/me", { replace: true });
+    }
   }, []);
 
   return (
