@@ -9,6 +9,7 @@ const {
   createEvent,
   updateEvent,
   removeEvent,
+  getUpcomingEvents,
 } = require("../controllers/event");
 
 router.param("eid", getEventById);
@@ -19,6 +20,12 @@ router.get(
   "/event/user/all",
   passport.authenticate("jwt", { session: false }),
   getAllEvents
+);
+
+router.get(
+  "/event/user/upcoming",
+  passport.authenticate("jwt", { session: false }),
+  getUpcomingEvents
 );
 
 router.post(

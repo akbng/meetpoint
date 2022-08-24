@@ -25,6 +25,37 @@ const getEventById = async (req, res, next, id) => {
   }
 };
 
+const getUpcomingEvents = async (req, res) => {
+  const user = req.user;
+  const currentDate = new Date();
+
+  try {
+    const events = await Event.find({
+      creator: user._id,
+      date: {
+        $gte: currentDate,
+        $lt: new Date(currentDate.getFullYear(), currentDate.getMonth() + 2),
+      },
+    })
+      .populate("creator", ["_id", "name", "email"])
+      .populate("attendees.user", ["_id", "name", "email"]);
+
+    if (events.length === 0)
+      return res.status(400).json({
+        error: true,
+        reason: "No Upcoming Events found for the user",
+      });
+
+    return res.status(200).json({ error: false, data: events });
+  } catch (err) {
+    console.log(err);
+    return res.status(400).json({
+      error: true,
+      reason: err.reason || err.message,
+    });
+  }
+};
+
 const getAllEvents = async (req, res) => {
   const user = req.user;
 
@@ -36,7 +67,7 @@ const getAllEvents = async (req, res) => {
     if (events.length === 0)
       return res.status(400).json({
         error: true,
-        reason: "No Event found for the user",
+        reason: "No Events found for the user",
       });
 
     return res.status(200).json({ error: false, data: events });
@@ -127,6 +158,7 @@ const removeEvent = async (req, res) => {
 
 module.exports = {
   getEventById,
+  getUpcomingEvents,
   getAllEvents,
   getEvent,
   createEvent,
