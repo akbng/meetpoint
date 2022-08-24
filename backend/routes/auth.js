@@ -42,7 +42,7 @@ router.post(
   register
 );
 
-router.get("/signout", logout);
+router.get("/logout", logout);
 
 router.get(
   "/generate/token/rtc",
