@@ -32,7 +32,7 @@ app.use(passport.initialize());
 
 const apiPrefix = "/api/v1";
 app.use(apiPrefix + "/auth", authRoutes);
-app.use(apiPrefix + eventRoutes);
+app.use(apiPrefix, eventRoutes);
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");

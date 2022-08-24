@@ -13,7 +13,7 @@ const {
 
 router.param("eid", getEventById);
 
-router.get("/event/:eid", getEvent);
+router.get("/event/:eid", getEvent); // only this route doesn't require Authentication
 
 router.get(
   "/event/user/all",

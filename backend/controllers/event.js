@@ -4,7 +4,7 @@ const { makeObject } = require("../utils");
 const getEventById = async (req, res, next, id) => {
   try {
     const event = await Event.findById(id)
-      .populate("user", ["_id", "name", "email"])
+      .populate("creator", ["_id", "name", "email"])
       .populate("attendees.user", ["_id", "name", "email"]);
 
     if (!event)
@@ -30,7 +30,7 @@ const getAllEvents = async (req, res) => {
 
   try {
     const events = await Event.find({ creator: user._id })
-      .populate("user", ["_id", "name", "email"])
+      .populate("creator", ["_id", "name", "email"])
       .populate("attendees.user", ["_id", "name", "email"]);
 
     if (events.length === 0)
@@ -63,7 +63,7 @@ const createEvent = async (req, res) => {
       time,
       color,
       creator: req.user._id,
-      attendees: attendees.map((at) => at.user),
+      attendees: attendees,
     })
   );
 
@@ -80,7 +80,7 @@ const createEvent = async (req, res) => {
 };
 
 const updateEvent = async (req, res) => {
-  if (req.event._id !== req.user._id) return res.sendStatus(403);
+  if (!req.event.creator._id.equals(req.user._id)) return res.sendStatus(403);
 
   const { name, description, date, time, color, attendees, agenda, rules } =
     req.body;
@@ -110,10 +110,10 @@ const updateEvent = async (req, res) => {
 };
 
 const removeEvent = async (req, res) => {
-  if (req.event._id !== req.user._id) return res.sendStatus(403);
+  if (!req.event.creator._id.equals(req.user._id)) return res.sendStatus(403);
 
   try {
-    const deleted = await User.deleteOne({ _id: req.event._id });
+    const deleted = await Event.deleteOne({ _id: req.event._id });
 
     return res.status(200).json({ error: false, data: deleted });
   } catch (err) {
