@@ -15,6 +15,7 @@ const initializePassport = require("./config/passport");
 // api routes
 const authRoutes = require("./routes/auth");
 const eventRoutes = require("./routes/event");
+const userRoutes = require("./routes/user");
 
 // connect to database
 require("./config/database");
@@ -33,6 +34,7 @@ app.use(passport.initialize());
 const apiPrefix = "/api/v1";
 app.use(apiPrefix + "/auth", authRoutes);
 app.use(apiPrefix, eventRoutes);
+app.use(apiPrefix, userRoutes);
 
 app.get("/", (req, res) => {
   res.send("The server is responding correctly");
