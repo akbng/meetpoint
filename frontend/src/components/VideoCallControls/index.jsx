@@ -15,6 +15,7 @@ const VideoCallControls = ({
   shareScreen,
   setShareScreen,
   setInCall,
+  closeScreenShare,
 }) => {
   const client = useClient();
   const [trackState, setTrackState] = useState({
@@ -36,6 +37,7 @@ const VideoCallControls = ({
     client.removeAllListeners();
     tracks[0].close();
     tracks[1].close();
+    closeScreenShare();
     setStartCall(false);
     setInCall(false);
   };

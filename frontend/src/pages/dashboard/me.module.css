@@ -1,0 +1,70 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.sidebar {
+  max-width: 200px;
+  min-width: 200px;
+  height: 100%;
+  padding: 0 0.5rem;
+  background-color: #eeeeee;
+}
+
+.instant_action {
+  position: absolute;
+  bottom: 10px;
+}
+
+.main_section {
+  width: 100%;
+  height: 100%;
+}
+
+.button {
+  display: block;
+  border: none;
+  border-radius: 0.25rem;
+  background: linear-gradient(15deg, #115e59 0%, #14b8a6 100%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0.5rem auto;
+  padding: 12px 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 80ms ease-in;
+  cursor: pointer;
+}
+
+.button:focus {
+  outline: none;
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 15px rgba(50, 220, 210, 1),
+    0 2px 20px rgba(50, 220, 210, 0.8);
+}
+
+.button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 2px 15px rgba(50, 220, 210, 1),
+    0 2px 20px rgba(50, 220, 210, 0.8);
+}
+
+.border_button {
+  background: none;
+  border: 1px solid #115e59;
+  color: #115e59;
+}
+
+.border_button:hover {
+  color: #115e59;
+}

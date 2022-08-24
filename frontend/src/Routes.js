@@ -4,6 +4,7 @@ import Home from "./pages";
 import Auth from "./pages/auth/user";
 import Dashboard from "./pages/dashboard/me";
 import Meeting from "./pages/meeting/call/[cid]";
+import JoinCall from "./pages/meeting/join/call";
 import ProtectedRoute from "./ProtectedRoute";
 
 const protect = (Component) => (
@@ -20,6 +21,7 @@ const Routes = () => {
         <Route path="/auth/user" element={<Auth />} />
         <Route path="/dashboard/me" element={protect(Dashboard)} />
         <Route path="/meeting/call/:cid" element={protect(Meeting)} />
+        <Route path="/meeting/join/call" element={<JoinCall />} />
         <Route path="*" element={<h1>ERROR 404</h1>} />
       </Switch>
     </BrowserRouter>

@@ -28,8 +28,19 @@ export const loginUser = ({ email, password }) =>
     }),
   }).then((res) => res.json());
 
+export const logoutUser = () =>
+  fetch(`${backendURL}/auth/logout`).then((res) => res.json());
+
 export const getRtcToken = ({ channelName }) =>
   fetch(`${backendURL}/auth/generate/token/rtc?channel=${channelName}`, {
+    method: "GET",
+    headers: {
+      Authorization: isAuthenticated().token,
+    },
+  }).then((res) => res.json());
+
+export const getUpcomingEvents = () =>
+  fetch(`${backendURL}/event/user/upcoming`, {
     method: "GET",
     headers: {
       Authorization: isAuthenticated().token,

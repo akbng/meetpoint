@@ -1,3 +1,5 @@
+import { logoutUser } from "../helper";
+
 export const authenticate = (token) => {
   if (typeof window !== "undefined")
     return localStorage.setItem("token", JSON.stringify(token));
@@ -5,8 +7,15 @@ export const authenticate = (token) => {
 };
 
 export const isAuthenticated = () => {
-  if (typeof window == "undefined") return false;
+  if (typeof window === "undefined") return false;
   const data = JSON.parse(localStorage.getItem("token"));
   if (data && data.expiry * 1000 > Date.now()) return data;
   else return false;
+};
+
+export const logout = async () => {
+  if (typeof window === "undefined") return false;
+  await logoutUser();
+  localStorage.removeItem("token");
+  return true;
 };

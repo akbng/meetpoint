@@ -21,36 +21,35 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
     let init = async (channelName) => {
       client.on("user-published", async (user, mediaType) => {
         if (user.uid === screenUid) return;
-
-        await client.subscribe(user, mediaType);
+        console.log("NEW USER: ", user, mediaType);
         console.log("subscribe success");
-        if (mediaType === "video") {
-          setUsers((prevUsers) => {
-            return [...prevUsers, user];
-          });
-        }
-        if (mediaType === "audio") {
-          user.audioTrack?.play();
-        }
+        if (mediaType === "video")
+          setUsers((prevUsers) =>
+            prevUsers.map((ps) => ps.uid).includes(user.uid)
+              ? prevUsers
+              : [...prevUsers, user]
+          );
+
+        if (mediaType === "audio") user.audioTrack?.play();
+        // TODO: track video users and audio users separately
+        await client.subscribe(user, mediaType);
       });
 
       client.on("user-unpublished", (user, type) => {
         console.log("unpublished", user, type);
-        if (type === "audio") {
-          user.audioTrack?.stop();
-        }
-        if (type === "video") {
-          setUsers((prevUsers) => {
-            return prevUsers.filter((User) => User.uid !== user.uid);
-          });
-        }
+        if (type === "audio") user.audioTrack?.stop();
+
+        if (type === "video")
+          setUsers((prevUsers) =>
+            prevUsers.filter((User) => User.uid !== user.uid)
+          );
       });
 
       client.on("user-left", (user) => {
         console.log("leaving", user);
-        setUsers((prevUsers) => {
-          return prevUsers.filter((User) => User.uid !== user.uid);
-        });
+        setUsers((prevUsers) =>
+          prevUsers.filter((User) => User.uid !== user.uid)
+        );
       });
 
       const uid = await client.join(appId, channelName, token, null);
@@ -110,6 +109,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
           setStartCall={setStartCall}
           shareScreen={shareScreen}
           tracks={tracks}
+          closeScreenShare={handleShareScreenClose}
         />
       )}
       {startCall && tracks && (

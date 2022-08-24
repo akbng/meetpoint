@@ -4,11 +4,8 @@ const Videos = ({ users, tracks, screenTracks }) => {
   return (
     <div>
       <div id="videos">
-        {tracks[1].enabled ? (
-          <AgoraVideoPlayer className="vid" videoTrack={tracks[1]} />
-        ) : (
-          "Video Disabled"
-        )}
+        <AgoraVideoPlayer className="vid" videoTrack={tracks[1]} />
+
         {screenTracks ? (
           Array.isArray(screenTracks) ? (
             <AgoraVideoPlayer className="vid" videoTrack={screenTracks[0]} />
