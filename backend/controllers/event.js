@@ -85,6 +85,12 @@ const getEvent = (req, res) =>
 const createEvent = async (req, res) => {
   const { name, description, date, time, color, attendees } = req.body;
 
+  const isPastDate = new Date(date) < new Date();
+  if (isPastDate)
+    return res
+      .status(400)
+      .json({ error: true, reason: "Can not create event for the past" });
+
   const event = Event(
     makeObject({
       name,
@@ -114,6 +120,13 @@ const updateEvent = async (req, res) => {
 
   const { name, description, date, time, color, attendees, agenda, rules } =
     req.body;
+
+  const isPastDate = date ? new Date(date) < new Date() : false;
+  if (isPastDate)
+    return res
+      .status(400)
+      .json({ error: true, reason: "Can not create event for the past" });
+
   try {
     const newEvent = await Event.findByIdAndUpdate(
       req.event._id,
