@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   background-color: #fff;
-  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,12 +15,16 @@
   min-width: 200px;
   height: 100%;
   padding: 0 0.5rem;
-  background-color: #eeeeee;
+  background-color: #efefef;
+  border-right: 1px solid #ddd;
+  position: relative;
 }
 
 .instant_action {
   position: absolute;
   bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .main_section {
@@ -30,6 +33,7 @@
 }
 
 .button {
+  width: 180px;
   display: block;
   border: none;
   border-radius: 0.25rem;

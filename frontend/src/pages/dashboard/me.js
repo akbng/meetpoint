@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import styles from "./me.module.css";
 import MeetingSection from "../../components/MeetingSection";
 import { logout } from "../../utils";
+import { FaSignOutAlt } from "react-icons/fa";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Dashboard = () => {
               navigate("/auth/user");
             }}
           >
-            Logout
+            Logout <FaSignOutAlt />
           </button>
           <Link
             to="/meeting/join/call"
