@@ -65,3 +65,14 @@ export const getAllUsers = () =>
       Authorization: isAuthenticated().token,
     },
   }).then((res) => res.json());
+
+export const getEventById = (eventId) =>
+  fetch(`${backendURL}/event/${eventId}`).then((res) => res.json());
+
+export const removeEvent = (eventId) =>
+  fetch(`${backendURL}/event/${eventId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: isAuthenticated().token,
+    },
+  }).then((res) => res.json());
