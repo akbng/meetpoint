@@ -1,3 +1,5 @@
+const isPast = require("date-fns/isPast");
+
 const { Event } = require("../models/Event");
 const { makeObject } = require("../utils");
 
@@ -85,8 +87,7 @@ const getEvent = (req, res) =>
 const createEvent = async (req, res) => {
   const { name, description, date, time, color, attendees } = req.body;
 
-  const isPastDate = new Date(date) < new Date();
-  if (isPastDate)
+  if (isPast(new Date(date)))
     return res
       .status(400)
       .json({ error: true, reason: "Can not create event for the past" });
@@ -121,8 +122,7 @@ const updateEvent = async (req, res) => {
   const { name, description, date, time, color, attendees, agenda, rules } =
     req.body;
 
-  const isPastDate = date ? new Date(date) < new Date() : false;
-  if (isPastDate)
+  if (isPast(new Date(date)))
     return res
       .status(400)
       .json({ error: true, reason: "Can not create event for the past" });
