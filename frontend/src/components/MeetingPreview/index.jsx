@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 import { AgoraVideoPlayer } from "agora-rtc-react";
 import AgoraRTC from "agora-rtc-sdk-ng";
+import Select from "react-select";
+import {
+  BsFillMicFill,
+  BsFillMicMuteFill,
+  BsFillCameraVideoFill,
+  BsFillCameraVideoOffFill,
+} from "react-icons/bs";
+
+import styles from "./index.module.css";
 
 const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
   const [audioDevices, setAudioDevices] = useState([]);
@@ -29,74 +38,77 @@ const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
     });
   };
 
-  const handleDeviceChange = (type) => async (e) => {
-    const deviceId = e.target.value;
-    if (type === "audio") await tracks[0].setDevice(deviceId);
-    if (type === "video") await tracks[1].setDevice(deviceId);
+  const handleDeviceChange = (type) => async (option) => {
+    if (type === "audio") await tracks[0].setDevice(option.value);
+    if (type === "video") await tracks[1].setDevice(option.value);
   };
 
   return (
-    <div>
-      <h1>Preview Call</h1>
-      <div className="video_container">
-        <h2>Video Feed Here</h2>
-        <div id="videos">
-          {ready && tracks[1] && (
-            <AgoraVideoPlayer videoTrack={tracks[1]} className="vid" />
+    <div className={styles.container}>
+      <aside className={styles.side_panel}>
+        <div className={styles.device_selector}>
+          {audioDevices ? (
+            <div className={styles.audo_devices}>
+              <h3 style={{ color: "#fff" }}>Audio Devices</h3>
+              <Select
+                className={styles.device_list}
+                options={audioDevices.map((dev) => ({
+                  value: dev.deviceId,
+                  label: dev.label,
+                }))}
+                onChange={handleDeviceChange("audio")}
+              />
+            </div>
+          ) : (
+            <h3 style={{ color: "#fff" }}>No Audio Device Found</h3>
+          )}
+          {videoDevices ? (
+            <div className={styles.video_devices}>
+              <h3 style={{ color: "#fff" }}>Video Devices</h3>
+              <Select
+                className={styles.device_list}
+                options={videoDevices.map((dev) => ({
+                  value: dev.deviceId,
+                  label: dev.label,
+                }))}
+                onChange={handleDeviceChange("video")}
+              />
+            </div>
+          ) : (
+            <h3 style={{ color: "#fff" }}>No Video Device Found</h3>
           )}
         </div>
-      </div>
-      {ready && tracks && (
-        <div className="video_controls">
-          <button onClick={mute("video")}>
-            {trackState.video ? "Mute" : "Un-Mute"} Video
-          </button>
-          <button onClick={mute("audio")}>
-            {trackState.audio ? "Mute" : "Un-Mute"} Audio
+        <div>
+          <button
+            className={styles.button}
+            onClick={() => setStartCall(true)}
+            disabled={!ready || !token}
+          >
+            Join Call
           </button>
         </div>
-      )}
-      <div className="device_selector">
-        {audioDevices ? (
-          <div className="audio_devices">
-            <h3>Audio Devices</h3>
-            <select
-              className="devices_list"
-              onChange={handleDeviceChange("audio")}
-            >
-              {audioDevices.map((device) => (
-                <option key={device.deviceId} value={device.deviceId}>
-                  {device.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <h3>No Audio Device Found</h3>
-        )}
-        {videoDevices ? (
-          <div className="video_devices">
-            <h3>Video Devices</h3>
-            <select
-              className="devices_list"
-              onChange={handleDeviceChange("video")}
-            >
-              {videoDevices.map((device) => (
-                <option key={device.deviceId} value={device.deviceId}>
-                  {device.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        ) : (
-          <h3>No Video Device Found</h3>
-        )}
-      </div>
-      <br />
-      <div>
-        <button onClick={() => setStartCall(true)} disabled={!ready || !token}>
-          Join Call
-        </button>
+      </aside>
+
+      <div className={styles.preview_container}>
+        <div className={styles.video_container}>
+          {ready && tracks[1] && (
+            <AgoraVideoPlayer videoTrack={tracks[1]} className={styles.video} />
+          )}
+          {ready && tracks && (
+            <div className={styles.preview_controls}>
+              <button className={styles.control_button} onClick={mute("video")}>
+                {trackState.video ? (
+                  <BsFillCameraVideoFill />
+                ) : (
+                  <BsFillCameraVideoOffFill />
+                )}
+              </button>
+              <button className={styles.control_button} onClick={mute("audio")}>
+                {trackState.audio ? <BsFillMicFill /> : <BsFillMicMuteFill />}
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
