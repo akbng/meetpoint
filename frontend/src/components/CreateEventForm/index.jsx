@@ -7,14 +7,14 @@ import { createEvent, getAllUsers } from "../../helper";
 import { isAuthenticated } from "../../utils";
 import styles from "./index.module.css";
 
-const CreateEventForm = ({ setIsOpen, userDate }) => {
+const CreateEventForm = ({ setIsOpen, event }) => {
   const [value, setValue] = useState({
-    name: "",
-    description: "",
-    date: format(userDate || new Date(), "yyyy-MM-dd"),
-    time: "",
-    color: "blue",
-    attendees: [],
+    name: event?.name || "",
+    description: event?.description || "",
+    date: format(event?.date || new Date(), "yyyy-MM-dd"),
+    time: event?.time || "",
+    color: event?.color || "blue",
+    attendees: event?.attendees || [],
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -150,7 +150,7 @@ const CreateEventForm = ({ setIsOpen, userDate }) => {
             />
           </div>
           <div>
-            <button onClick={() => setIsOpen(false)}>
+            <button type="" onClick={() => setIsOpen(false)}>
               Cancel <FaTimes />
             </button>
             <button type="submit">
