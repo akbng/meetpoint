@@ -56,4 +56,12 @@ export const createEvent = (values) =>
       Authorization: isAuthenticated().token,
     },
     body: JSON.stringify(values),
-  });
+  }).then((res) => res.json());
+
+export const getAllUsers = () =>
+  fetch(`${backendURL}/user/all`, {
+    method: "GET",
+    headers: {
+      Authorization: isAuthenticated().token,
+    },
+  }).then((res) => res.json());
