@@ -24,3 +24,10 @@ export const useScreenTracks = createScreenVideoTrack(
   screenTrackConfig,
   "auto"
 );
+
+export const rtmLogin = async ({ client, channel, uid, token }) => {
+  await client.login({ uid, token }).then(async () => {
+    console.log("Login Successful");
+    await channel.join();
+  });
+};
