@@ -29,6 +29,7 @@ const VideoCallControls = ({
   setIsPanelOpen,
   panelMode,
   setPanelMode,
+  rtmClient,
 }) => {
   const client = useClient();
   const [trackState, setTrackState] = useState({
@@ -46,6 +47,7 @@ const VideoCallControls = ({
   };
 
   const leaveChannel = async () => {
+    await rtmClient.logout();
     await client.leave();
     client.removeAllListeners();
     tracks[0].close();
