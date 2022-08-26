@@ -25,6 +25,10 @@ const VideoCallControls = ({
   setShareScreen,
   setInCall,
   closeScreenShare,
+  isPanelOpen,
+  setIsPanelOpen,
+  panelMode,
+  setPanelMode,
 }) => {
   const client = useClient();
   const [trackState, setTrackState] = useState({
@@ -53,8 +57,21 @@ const VideoCallControls = ({
 
   const toggleScreenShare = () => setShareScreen(!shareScreen);
 
+  const toggleMode = (mode) => () => {
+    if (mode === panelMode) {
+      setIsPanelOpen(false);
+      setPanelMode("");
+    } else {
+      setPanelMode(mode);
+      setIsPanelOpen(true);
+    }
+  };
+
   return (
-    <div className={styles.video_controllers}>
+    <div
+      className={styles.video_controllers}
+      style={{ width: isPanelOpen ? "75%" : "100%" }}
+    >
       <button className={trackState.audio ? "on" : ""} onClick={mute("audio")}>
         {trackState.audio ? <BsFillMicFill /> : <BsFillMicMuteFill />}
       </button>
@@ -74,13 +91,13 @@ const VideoCallControls = ({
       <button className={styles.end_call} onClick={() => leaveChannel()}>
         <MdCallEnd />
       </button>
-      <button>
+      <button onClick={toggleMode("people")}>
         <FaUsers />
       </button>
-      <button>
+      <button onClick={toggleMode("chat")}>
         <MdMessage />
       </button>
-      <button>
+      <button onClick={toggleMode("note")}>
         <MdEditNote />
       </button>
       <button>
