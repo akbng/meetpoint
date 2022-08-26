@@ -1,8 +1,11 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
+import AgoraRTM from "agora-rtm-sdk";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
-import { appId, useClient, useScreenClient } from "../../config";
+import { appId, rtmLogin, useClient, useScreenClient } from "../../config";
+import { getRtmToken } from "../../helper";
+import Chat from "../Chat";
 import VideoCallControls from "../VideoCallControls";
 import Videos from "../Videos";
 import styles from "./index.module.css";
@@ -15,14 +18,20 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
   const [startCall, setStartCall] = useState(false);
   const [shareScreen, setShareScreen] = useState(false);
   const [screenTracks, setScreenTracks] = useState(null);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  const [panelMode, setPanelMode] = useState("");
+  const [rtmClient, setRtmClient] = useState(null);
+  const [rtmChannel, setRtmChannel] = useState(null);
+  const [chats, setChats] = useState([]);
   const screenClient = useScreenClient();
   const client = useClient();
 
   useEffect(() => {
-    let init = async (channelName) => {
+    const init = async (channelName) => {
       client.on("user-published", async (user, mediaType) => {
         if (user.uid === screenUid) return;
         console.log("NEW USER: ", user, mediaType);
+        await client.subscribe(user, mediaType);
         console.log("subscribe success");
         if (mediaType === "video")
           setUsers((prevUsers) =>
@@ -33,7 +42,6 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
 
         if (mediaType === "audio") user.audioTrack?.play();
         // TODO: track video users and audio users separately
-        await client.subscribe(user, mediaType);
       });
 
       client.on("user-unpublished", (user, type) => {
@@ -59,9 +67,42 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
       setStartCall(true);
     };
 
+    const configRTM = async (channelName) => {
+      const { data } = await getRtmToken();
+      const token = data?.token;
+      const uid = data?.uid;
+
+      const instance = AgoraRTM.createInstance(appId);
+      setRtmClient(instance);
+      instance.on("ConnectionStateChanged", (state, reason) =>
+        console.log("State changed To: " + state + " Reason: " + reason)
+      );
+
+      const channel = instance.createChannel(channelName);
+      setRtmChannel(channel);
+
+      channel.on("ChannelMessage", (message, memberId) =>
+        setChats((prevChats) => {
+          return [
+            ...prevChats,
+            { member: memberId.split("-")[0], message: message.text },
+          ];
+        })
+      );
+      channel.on("MemberJoined", (memberId) => {
+        console.log(memberId, " joined the channel");
+      });
+      channel.on("MemberLeft", (memberId) => {
+        console.log(memberId, " left the channel");
+      });
+
+      rtmLogin({ uid, token, channel, client: instance });
+    };
+
     if (ready && tracks) {
       console.log("init ready");
       init(channelName);
+      configRTM(channelName);
     }
   }, [client, tracks, ready]);
 
@@ -111,11 +152,42 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
           shareScreen={shareScreen}
           tracks={tracks}
           closeScreenShare={handleShareScreenClose}
+          isPanelOpen={isPanelOpen}
+          setIsPanelOpen={setIsPanelOpen}
+          panelMode={panelMode}
+          setPanelMode={setPanelMode}
+          rtmClient={rtmClient}
         />
       )}
       {startCall && tracks && (
         <Videos users={users} tracks={tracks} screenTracks={screenTracks} />
       )}
+      {isPanelOpen ? (
+        <aside className={styles.sidebar}>
+          <div className={styles.tabs}>
+            {["people", "chat", "note"].map((tab, i) => (
+              <div
+                key={i}
+                className={`${styles.tab} ${
+                  tab === panelMode ? styles.selected : ""
+                }`}
+              >
+                {tab}
+              </div>
+            ))}
+          </div>
+          {panelMode === "chat" ? (
+            <Chat
+              chats={chats}
+              setChats={setChats}
+              rtmChannel={rtmChannel}
+              rtmClient={rtmClient}
+            />
+          ) : (
+            ""
+          )}
+        </aside>
+      ) : null}
     </div>
   );
 };
