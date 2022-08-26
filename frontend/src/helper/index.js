@@ -39,6 +39,14 @@ export const getRtcToken = ({ channelName }) =>
     },
   }).then((res) => res.json());
 
+export const getRtmToken = () =>
+  fetch(`${backendURL}/auth/generate/token/rtm`, {
+    method: "GET",
+    headers: {
+      Authorization: isAuthenticated().token,
+    },
+  }).then((res) => res.json());
+
 export const getUpcomingEvents = () =>
   fetch(`${backendURL}/event/user/upcoming`, {
     method: "GET",
