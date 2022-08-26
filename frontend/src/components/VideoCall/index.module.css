@@ -1,0 +1,14 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: rgb(20, 184, 166);
+  background: radial-gradient(
+    circle,
+    rgba(20, 184, 166, 1) 0%,
+    rgba(17, 94, 89, 1) 85%
+  );
+  position: relative;
+  display: flex;
+  justify-content: center;
+}

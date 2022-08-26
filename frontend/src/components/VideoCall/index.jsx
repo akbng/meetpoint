@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import { appId, useClient, useScreenClient } from "../../config";
 import VideoCallControls from "../VideoCallControls";
 import Videos from "../Videos";
+import styles from "./index.module.css";
 
 const screenUid = Math.floor(Math.random() * 100000);
 
@@ -101,7 +102,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
   };
 
   return (
-    <div id="videos">
+    <div className={styles.container}>
       {ready && tracks && (
         <VideoCallControls
           setInCall={setInCall}

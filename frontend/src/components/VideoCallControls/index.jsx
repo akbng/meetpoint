@@ -4,10 +4,19 @@ import {
   BsFillMicMuteFill,
   BsFillCameraVideoFill,
   BsFillCameraVideoOffFill,
+  BsThreeDotsVertical,
 } from "react-icons/bs";
-import { MdCallEnd, MdScreenShare, MdStopScreenShare } from "react-icons/md";
+import { FaPollH, FaUsers } from "react-icons/fa";
+import {
+  MdCallEnd,
+  MdEditNote,
+  MdMessage,
+  MdScreenShare,
+  MdStopScreenShare,
+} from "react-icons/md";
 
 import { useClient } from "../../config";
+import styles from "./index.module.css";
 
 const VideoCallControls = ({
   tracks,
@@ -45,7 +54,7 @@ const VideoCallControls = ({
   const toggleScreenShare = () => setShareScreen(!shareScreen);
 
   return (
-    <div className="controls">
+    <div className={styles.video_controllers}>
       <button className={trackState.audio ? "on" : ""} onClick={mute("audio")}>
         {trackState.audio ? <BsFillMicFill /> : <BsFillMicMuteFill />}
       </button>
@@ -56,13 +65,26 @@ const VideoCallControls = ({
           <BsFillCameraVideoOffFill />
         )}
       </button>
-
       <button onClick={toggleScreenShare}>
         {shareScreen ? <MdStopScreenShare /> : <MdScreenShare />}
       </button>
-
-      <button onClick={() => leaveChannel()}>
+      <button>
+        <FaPollH />
+      </button>
+      <button className={styles.end_call} onClick={() => leaveChannel()}>
         <MdCallEnd />
+      </button>
+      <button>
+        <FaUsers />
+      </button>
+      <button>
+        <MdMessage />
+      </button>
+      <button>
+        <MdEditNote />
+      </button>
+      <button>
+        <BsThreeDotsVertical />
       </button>
     </div>
   );

@@ -150,14 +150,14 @@ const CreateEventForm = ({ setIsOpen, event }) => {
             />
           </div>
           <div>
-            <button type="" onClick={() => setIsOpen(false)}>
-              Cancel <FaTimes />
-            </button>
             <button type="submit">
               Save <FaSave />
             </button>
           </div>
         </form>
+        <button onClick={() => setIsOpen(false)}>
+          Cancel <FaTimes />
+        </button>
       </main>
     </div>
   );

@@ -1,33 +1,38 @@
 import { AgoraVideoPlayer } from "agora-rtc-react";
 
+import styles from "./index.module.css";
+
 const Videos = ({ users, tracks, screenTracks }) => {
   return (
-    <div>
-      <div id="videos">
-        <AgoraVideoPlayer className="vid" videoTrack={tracks[1]} />
+    <div className={styles.videos}>
+      <AgoraVideoPlayer className={styles.video} videoTrack={tracks[1]} />
 
-        {screenTracks ? (
-          Array.isArray(screenTracks) ? (
-            <AgoraVideoPlayer className="vid" videoTrack={screenTracks[0]} />
-          ) : (
-            <AgoraVideoPlayer className="vid" videoTrack={screenTracks} />
-          )
+      {screenTracks ? (
+        Array.isArray(screenTracks) ? (
+          <AgoraVideoPlayer
+            className={styles.video}
+            videoTrack={screenTracks[0]}
+          />
         ) : (
-          ""
-        )}
-        {users.length > 0 &&
-          users.map((user) => {
-            if (user.videoTrack)
-              return (
-                <AgoraVideoPlayer
-                  className="vid"
-                  videoTrack={user.videoTrack}
-                  key={user.uid}
-                />
-              );
-            else return <div>{user.uid} Disabled Video</div>;
-          })}
-      </div>
+          <AgoraVideoPlayer
+            className={styles.video}
+            videoTrack={screenTracks}
+          />
+        )
+      ) : (
+        ""
+      )}
+      {users.length > 0 &&
+        users.map((user) => {
+          if (user.videoTrack)
+            return (
+              <AgoraVideoPlayer
+                className={styles.video}
+                videoTrack={user.videoTrack}
+                key={user.uid}
+              />
+            );
+        })}
     </div>
   );
 };

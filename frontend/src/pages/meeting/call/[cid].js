@@ -20,24 +20,22 @@ const Meeting = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="App">
-        {inCall ? (
-          <VideoCall
-            ready={ready}
-            setInCall={setInCall}
-            token={token}
-            tracks={tracks}
-          />
-        ) : (
-          <MeetingPreview
-            ready={ready}
-            tracks={tracks}
-            token={token}
-            setStartCall={setInCall}
-          />
-        )}
-      </div>
+    <div>
+      {inCall ? (
+        <VideoCall
+          ready={ready}
+          setInCall={setInCall}
+          token={token}
+          tracks={tracks}
+        />
+      ) : (
+        <MeetingPreview
+          ready={ready}
+          tracks={tracks}
+          token={token}
+          setStartCall={setInCall}
+        />
+      )}
     </div>
   );
 };
