@@ -124,8 +124,10 @@ const generateRtcAuthToken = async (req, res) => {
 };
 
 const generateRtmUserToken = async (req, res) => {
+  const uid = req.user.fullName + "-" + uuidv4();
+
   try {
-    const data = await generateRtmToken(req.user._id);
+    const data = await generateRtmToken(uid);
     return res.status(200).json({ error: false, data: data });
   } catch (err) {
     return res
