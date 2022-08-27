@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import { loginUser } from "../../helper";
 import { authenticate, isAuthenticated } from "../../utils";
@@ -57,6 +58,10 @@ const Login = ({ className, active }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (error) toast.error(error);
+  }, [error]);
 
   return (
     <div

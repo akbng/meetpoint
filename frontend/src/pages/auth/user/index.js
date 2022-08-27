@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import Login from "../../../components/Login";
@@ -21,6 +22,7 @@ const Auth = () => {
 
   return (
     <div className={styles.outer_container}>
+      <Toaster />
       <div
         className={`${styles.inner_container} ${
           rightPanelActive ? styles.right_panel_active : ""
