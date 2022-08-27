@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   BsFillMicFill,
   BsFillMicMuteFill,
@@ -31,6 +32,8 @@ const VideoCallControls = ({
   setPanelMode,
   rtmClient,
 }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const client = useClient();
   const [trackState, setTrackState] = useState({
     video: tracks[1]?.enabled,
@@ -55,6 +58,7 @@ const VideoCallControls = ({
     closeScreenShare();
     setStartCall(false);
     setInCall(false);
+    navigate("/meeting/leave/call", { state: { from: location.pathname } });
   };
 
   const toggleScreenShare = () => setShareScreen(!shareScreen);
