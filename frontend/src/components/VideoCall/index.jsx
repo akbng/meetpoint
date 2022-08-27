@@ -2,6 +2,7 @@ import AgoraRTC from "agora-rtc-sdk-ng";
 import AgoraRTM from "agora-rtm-sdk";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 import { appId, rtmLogin, useClient, useScreenClient } from "../../config";
 import { getRtmToken } from "../../helper";
@@ -26,6 +27,14 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
   const [rtmClient, setRtmClient] = useState(null);
   const [rtmChannel, setRtmChannel] = useState(null);
   const [chats, setChats] = useState([]);
+  const [blocks, setBlocks] = useState([
+    {
+      id: uuidv4(),
+      html: "",
+      tag: "h1",
+    },
+  ]);
+
   const screenClient = useScreenClient();
   const client = useClient();
 
@@ -182,7 +191,9 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
           {panelMode === "people" ? (
             <PartipantsList users={allUsers} channelName={channelName} />
           ) : null}
-          {panelMode === "note" ? <Note /> : null}
+          {panelMode === "note" ? (
+            <Note blocks={blocks} setBlocks={setBlocks} />
+          ) : null}
           {panelMode === "chat" ? (
             <Chat
               chats={chats}

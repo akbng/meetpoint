@@ -7,14 +7,7 @@ import { setCaretToEnd } from "../../utils";
 import EditableBlock from "../EditableBlock";
 import styles from "./index.module.css";
 
-const Note = () => {
-  const [blocks, setBlocks] = useState([
-    {
-      id: uuidv4(),
-      html: "",
-      tag: "h1",
-    },
-  ]);
+const Note = ({ blocks, setBlocks }) => {
   const [currentBlockId, setCurrentBlockId] = useState(null);
   const prevBlocks = usePrevious(blocks);
 
