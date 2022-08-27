@@ -26,7 +26,6 @@ const Chat = ({ chats, setChats, rtmChannel, rtmClient }) => {
   };
 
   useEffect(() => {
-    console.log("hola");
     scrollToBottom();
   }, [chats]);
 

@@ -171,6 +171,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
                 className={`${styles.tab} ${
                   tab === panelMode ? styles.selected : ""
                 }`}
+                onClick={() => setPanelMode(tab)}
               >
                 {tab}
               </div>
