@@ -1,0 +1,17 @@
+.block {
+  padding: 0.45rem 0.8rem;
+  /* Better support for safari */
+  -webkit-user-select: text;
+  user-select: text;
+  border-radius: 0.6rem;
+  margin: 0.2rem 0;
+}
+
+.block:focus,
+.blockSelected {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.placeholder {
+  color: rgba(72, 72, 72, 0.25);
+}
