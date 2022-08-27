@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { appId, rtmLogin, useClient, useScreenClient } from "../../config";
 import { getRtmToken } from "../../helper";
 import Chat from "../Chat";
+import Note from "../Note";
 import VideoCallControls from "../VideoCallControls";
 import Videos from "../Videos";
 import styles from "./index.module.css";
@@ -101,7 +102,8 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
 
     if (ready && tracks) {
       console.log("init ready");
-      init(channelName);
+      // init(channelName);
+      setStartCall(true);
       configRTM(channelName);
     }
   }, [client, tracks, ready]);
@@ -184,9 +186,8 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
               rtmChannel={rtmChannel}
               rtmClient={rtmClient}
             />
-          ) : (
-            ""
-          )}
+          ) : null}
+          {panelMode === "note" ? <Note /> : null}
         </aside>
       ) : null}
     </div>
