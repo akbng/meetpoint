@@ -25,9 +25,17 @@ export const useScreenTracks = createScreenVideoTrack(
   "auto"
 );
 
-export const rtmLogin = async ({ client, channel, uid, token }) => {
+export const rtmLogin = async ({
+  client,
+  channel,
+  uid,
+  token,
+  setAllUsers,
+}) => {
   await client.login({ uid, token }).then(async () => {
     console.log("Login Successful");
     await channel.join();
+    const members = await channel.getMembers();
+    setAllUsers([...members.filter((memberId) => memberId !== uid)]);
   });
 };

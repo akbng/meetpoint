@@ -7,6 +7,7 @@ import { appId, rtmLogin, useClient, useScreenClient } from "../../config";
 import { getRtmToken } from "../../helper";
 import Chat from "../Chat";
 import Note from "../Note";
+import PartipantsList from "../ParticpantsList";
 import VideoCallControls from "../VideoCallControls";
 import Videos from "../Videos";
 import styles from "./index.module.css";
@@ -16,6 +17,7 @@ const screenUid = Math.floor(Math.random() * 100000);
 const VideoCall = ({ ready, tracks, token, setInCall }) => {
   const { cid: channelName } = useParams();
   const [users, setUsers] = useState([]);
+  const [allUsers, setAllUsers] = useState([]);
   const [startCall, setStartCall] = useState(false);
   const [shareScreen, setShareScreen] = useState(false);
   const [screenTracks, setScreenTracks] = useState(null);
@@ -35,11 +37,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
         await client.subscribe(user, mediaType);
         console.log("subscribe success");
         if (mediaType === "video")
-          setUsers((prevUsers) =>
-            prevUsers.map((ps) => ps.uid).includes(user.uid)
-              ? prevUsers
-              : [...prevUsers, user]
-          );
+          setUsers((prevUsers) => [...prevUsers, user]);
 
         if (mediaType === "audio") user.audioTrack?.play();
         // TODO: track video users and audio users separately
@@ -92,18 +90,20 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
       );
       channel.on("MemberJoined", (memberId) => {
         console.log(memberId, " joined the channel");
+        console.log(allUsers, [...allUsers, memberId]);
+        setAllUsers([...allUsers, memberId]);
       });
       channel.on("MemberLeft", (memberId) => {
         console.log(memberId, " left the channel");
+        setAllUsers([...allUsers.filter((member) => member !== memberId)]);
       });
 
-      rtmLogin({ uid, token, channel, client: instance });
+      rtmLogin({ uid, token, channel, client: instance, setAllUsers });
     };
 
     if (ready && tracks) {
       console.log("init ready");
-      // init(channelName);
-      setStartCall(true);
+      init(channelName);
       configRTM(channelName);
     }
   }, [client, tracks, ready]);
@@ -179,6 +179,10 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
               </div>
             ))}
           </div>
+          {panelMode === "people" ? (
+            <PartipantsList users={allUsers} channelName={channelName} />
+          ) : null}
+          {panelMode === "note" ? <Note /> : null}
           {panelMode === "chat" ? (
             <Chat
               chats={chats}
@@ -187,7 +191,6 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
               rtmClient={rtmClient}
             />
           ) : null}
-          {panelMode === "note" ? <Note /> : null}
         </aside>
       ) : null}
     </div>
