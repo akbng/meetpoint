@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { appId, rtmLogin, useClient, useScreenClient } from "../../config";
 import { getRtmToken } from "../../helper";
+import { isAuthenticated } from "../../utils";
 import Chat from "../Chat";
 import Note from "../Note";
 import PartipantsList from "../ParticpantsList";
@@ -40,6 +41,8 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
   const client = useClient();
 
   useEffect(() => {
+    const myUID = isAuthenticated().name + "-" + ~~(Math.random() * 1000);
+
     const init = async (channelName) => {
       client.on("user-published", async (user, mediaType) => {
         if (user.uid === screenUid) return;
@@ -50,7 +53,6 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
           setUsers((prevUsers) => [...prevUsers, user]);
 
         if (mediaType === "audio") user.audioTrack?.play();
-        // TODO: track video users and audio users separately
       });
 
       client.on("user-unpublished", (user, type) => {
@@ -70,7 +72,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
         );
       });
 
-      const uid = await client.join(appId, channelName, token, null);
+      const uid = await client.join(appId, channelName, token, myUID);
       console.log("My user id: ", uid);
       if (tracks) {
         let tracksToPublish = [];
@@ -88,7 +90,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
     };
 
     const configRTM = async (channelName) => {
-      const { data } = await getRtmToken();
+      const { data } = await getRtmToken(myUID);
       const token = data?.token;
       const uid = data?.uid;
 
@@ -123,7 +125,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
     };
 
     if (ready && tracks) {
-      console.log("init ready");
+      console.log("init ready with uid: ", myUID);
       init(channelName);
       configRTM(channelName);
     }
@@ -184,7 +186,12 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
         />
       )}
       {startCall && tracks && (
-        <Videos users={users} tracks={tracks} screenTracks={screenTracks} />
+        <Videos
+          users={users}
+          allUsers={allUsers}
+          tracks={tracks}
+          screenTracks={screenTracks}
+        />
       )}
       {isPanelOpen ? (
         <aside className={styles.sidebar}>

@@ -17,14 +17,35 @@
   position: relative;
 }
 
+.video div {
+  border-radius: 0.6rem;
+}
+
 .icon {
+  display: block;
   width: 75px;
   height: 75px;
+  padding: 0.5rem;
   border-radius: 100%;
-  background-color: var(--orange);
+  background-color: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 0 26px var(--orange);
+  box-shadow: 0 0 26px #fff;
+  text-align: center;
+}
+
+.username {
+  color: #fff;
+  width: max-content;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+}
+
+.icon > .username {
+  top: 125%;
+  left: 50%;
+  transform: translateX(-50%);
 }
