@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 import Login from "../../../components/Login";
 import Register from "../../../components/Register";
@@ -9,8 +9,11 @@ import styles from "./index.module.css";
 
 const Auth = () => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const [rightPanelActive, setRightPanelActive] = useState(true);
+  const [rightPanelActive, setRightPanelActive] = useState(
+    searchParams.get("mode") === "register"
+  );
 
   useEffect(() => {
     if (isAuthenticated()) {

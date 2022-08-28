@@ -1,0 +1,88 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.menu {
+  width: 100%;
+  padding: 0.5rem 4.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 150px;
+}
+
+.menu_link_item {
+  font-size: 0.85rem;
+  font-weight: 800;
+  margin: 0 4px;
+  padding: 8px 14px;
+  color: #454545;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.register {
+  color: #fff;
+  border-radius: 0.4rem;
+  background: linear-gradient(15deg, #115e59 0%, #14b8a6 100%);
+}
+
+.header {
+  width: 100%;
+  height: 100%;
+  padding: 1.4rem 2.5rem 0;
+  text-align: center;
+}
+
+.title {
+  max-width: 800px;
+  font-size: 2.5rem;
+  margin: 0 auto 2rem;
+  color: #115e59;
+}
+
+.subtitle {
+  max-width: 650px;
+  font-size: 1.2rem;
+  margin: 2.2rem auto;
+  color: #454545;
+}
+
+.lady {
+  width: 400px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.button {
+  background: none;
+  border: 1px solid #115e59;
+  border-radius: 3.2rem;
+  color: #115e59;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 12px 18px;
+  margin: 0 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 80ms ease-in;
+  cursor: pointer;
+}
+
+.button:active {
+  transform: scale(0.95);
+}
+
+.button:hover {
+  box-shadow: 0 2px 15px rgba(50, 220, 210, 1),
+    0 2px 20px rgba(50, 220, 210, 0.8);
+}
