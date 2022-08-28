@@ -5,9 +5,8 @@ import {
   BsFillMicMuteFill,
   BsFillCameraVideoFill,
   BsFillCameraVideoOffFill,
-  BsThreeDotsVertical,
 } from "react-icons/bs";
-import { FaPollH, FaUsers } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import {
   MdCallEnd,
   MdEditNote,
@@ -31,14 +30,16 @@ const VideoCallControls = ({
   panelMode,
   setPanelMode,
   rtmClient,
+  trackState,
+  setTrackState,
 }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const client = useClient();
-  const [trackState, setTrackState] = useState({
-    video: tracks[1]?.enabled,
-    audio: tracks[0]?.enabled,
-  });
+  // const [trackState, setTrackState] = useState({
+  //   video: tracks[1]?.enabled,
+  //   audio: tracks[0]?.enabled,
+  // });
 
   const mute = (type) => async () => {
     if (type === "audio") await tracks[0].setEnabled(!trackState[type]);
@@ -91,9 +92,6 @@ const VideoCallControls = ({
       <button onClick={toggleScreenShare}>
         {shareScreen ? <MdStopScreenShare /> : <MdScreenShare />}
       </button>
-      <button>
-        <FaPollH />
-      </button>
       <button className={styles.end_call} onClick={() => leaveChannel()}>
         <MdCallEnd />
       </button>
@@ -105,9 +103,6 @@ const VideoCallControls = ({
       </button>
       <button onClick={toggleMode("note")}>
         <MdEditNote />
-      </button>
-      <button>
-        <BsThreeDotsVertical />
       </button>
     </div>
   );

@@ -15,7 +15,7 @@ import VideoCallControls from "../VideoCallControls";
 import Videos from "../Videos";
 import styles from "./index.module.css";
 
-const screenUid = Math.floor(Math.random() * 100000);
+const screenUid = uuidv4();
 
 const VideoCall = ({ ready, tracks, token, setInCall }) => {
   const { cid: channelName } = useParams();
@@ -29,6 +29,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
   const [rtmClient, setRtmClient] = useState(null);
   const [rtmChannel, setRtmChannel] = useState(null);
   const [chats, setChats] = useState([]);
+  const [myUid, setMyUid] = useState("");
   const [blocks, setBlocks] = useState([
     {
       id: uuidv4(),
@@ -36,12 +37,17 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
       tag: "h1",
     },
   ]);
+  const [trackState, setTrackState] = useState({
+    video: tracks[1]?.enabled,
+    audio: tracks[0]?.enabled,
+  });
 
   const screenClient = useScreenClient();
   const client = useClient();
 
   useEffect(() => {
     const myUID = isAuthenticated().name + "-" + ~~(Math.random() * 1000);
+    setMyUid(myUID);
 
     const init = async (channelName) => {
       client.on("user-published", async (user, mediaType) => {
@@ -183,6 +189,8 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
           panelMode={panelMode}
           setPanelMode={setPanelMode}
           rtmClient={rtmClient}
+          trackState={trackState}
+          setTrackState={setTrackState}
         />
       )}
       {startCall && tracks && (
@@ -191,6 +199,8 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
           allUsers={allUsers}
           tracks={tracks}
           screenTracks={screenTracks}
+          trackState={trackState}
+          myUid={myUid}
         />
       )}
       {isPanelOpen ? (

@@ -5,10 +5,32 @@ import Svg from "react-inlinesvg";
 
 import styles from "./index.module.css";
 
-const Videos = ({ users, allUsers, tracks, screenTracks }) => {
+const Videos = ({
+  users,
+  allUsers,
+  tracks,
+  screenTracks,
+  trackState,
+  myUid,
+}) => {
   return (
     <div className={styles.videos}>
-      <AgoraVideoPlayer className={styles.video} videoTrack={tracks[1]} />
+      {trackState.video ? (
+        <AgoraVideoPlayer className={styles.video} videoTrack={tracks[1]} />
+      ) : (
+        <div className={styles.video}>
+          <span className={styles.icon}>
+            <Svg
+              src={createAvatar(style, {
+                seed: myUid.split("-")[0],
+                dataUri: true,
+              })}
+              alt="avatar"
+            />
+            <div className={styles.username}>You</div>
+          </span>
+        </div>
+      )}
 
       {screenTracks ? (
         Array.isArray(screenTracks) ? (
