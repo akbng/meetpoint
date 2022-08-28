@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import Svg from "react-inlinesvg";
 
 import Logo from "../Logo.svg";
-// import Man from "../Man.svg";
-// import OfficeLady from "../OfficeLady.svg";
-// import TabletLady from "../TabletLady.svg";
 import styles from "./index.module.css";
 
 const Home = () => {
@@ -37,10 +34,16 @@ const Home = () => {
             Get started for free
           </Link>
         </div>
-        <main>
-          {/* <Svg src={OfficeLady} />
-          <Svg src={Man} />
-          <Svg src={TabletLady} /> */}
+        <main className={styles.mockup}>
+          <div className={styles.img}>
+            <img src="/OfficeLady.png" alt="Lady holding suitcase" />
+          </div>
+          <div className={styles.img}>
+            <img src="/Man.png" alt="Business man talking with arms open" />
+          </div>
+          <div className={styles.img}>
+            <img src="/TabletLady.png" alt="Girl holding tablet" />
+          </div>
         </main>
       </header>
     </div>
