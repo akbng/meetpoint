@@ -120,5 +120,11 @@
 }
 
 .img > img {
-  width: 100%;
+  width: 160%;
+  object-fit: fill;
+  transform: translate(-18%, 5%);
+}
+
+.mockup > .img:nth-child(2) > img {
+  margin-top: -28px;
 }
