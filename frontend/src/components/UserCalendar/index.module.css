@@ -1,4 +1,59 @@
 .calendar {
   width: 100%;
   max-width: 80vw;
+  height: 100%;
+}
+
+.tile {
+  width: 125px;
+  height: 82px;
+  padding: 0.8rem 0.6rem;
+}
+
+.tile p {
+  width: 100%;
+  font-weight: 600;
+  margin: 0.3rem 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.red {
+  color: #fff;
+  background-color: var(--red);
+}
+
+.orange {
+  color: #232323;
+  background-color: var(--orange);
+}
+
+.yellow {
+  color: #232323;
+  background-color: var(--yellow);
+}
+
+.green {
+  color: #fff;
+  background-color: var(--green);
+}
+
+.blue {
+  color: #fff;
+  background-color: var(--blue);
+}
+
+.pink {
+  color: #fff;
+  background-color: var(--pink);
+}
+
+.purple {
+  color: #fff;
+  background-color: var(--purple);
+}
+
+.tile:hover {
+  color: #232323;
 }
