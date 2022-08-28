@@ -74,7 +74,12 @@ const MeetingSection = () => {
             ))}
         </div>
       </div>
-      <UserCalendar events={allEvents} className={styles.calendar} />
+      <UserCalendar
+        events={allEvents}
+        setIsOpen={setIsOpen}
+        setEvent={setEvent}
+        className={styles.calendar}
+      />
       <button
         className={styles.floating_button}
         onClick={() => {
@@ -87,12 +92,11 @@ const MeetingSection = () => {
       <div>
         {isOpen && (
           <EventDialog isOpen={isOpen} closeDialog={closeDialog}>
-            <ViewEvent event={event} closeDialog={closeDialog} />
-          </EventDialog>
-        )}
-        {isOpen && createEvent && (
-          <EventDialog isOpen={isOpen} closeDialog={closeDialog}>
-            <CreateEventForm event={event} closeDialog={closeDialog} />
+            {createEvent ? (
+              <CreateEventForm event={event} closeDialog={closeDialog} />
+            ) : (
+              <ViewEvent event={event} closeDialog={closeDialog} />
+            )}
           </EventDialog>
         )}
       </div>

@@ -31,7 +31,7 @@
   min-width: 400px;
   min-height: 300px;
   max-width: 640px;
-  max-height: 480px;
+  height: 480px;
   border-radius: 0.25rem;
   background-color: #fff;
   position: relative;

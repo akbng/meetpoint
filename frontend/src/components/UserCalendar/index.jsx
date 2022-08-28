@@ -5,8 +5,17 @@ import "react-calendar/dist/Calendar.css";
 
 import styles from "./index.module.css";
 
-const UserCalendar = ({ className, events }) => {
-  const [value, onChange] = useState(new Date());
+const UserCalendar = ({ className, events, setEvent, setIsOpen }) => {
+  const [value, setValue] = useState(new Date());
+
+  const onChange = (date) => {
+    setValue(date);
+    const event = events.find((event) => isSameDay(date, new Date(event.date)));
+    if (event) {
+      setEvent(event);
+      setIsOpen(true);
+    }
+  };
 
   const tileContent = ({ date, view }) => {
     if (view === "month") {
