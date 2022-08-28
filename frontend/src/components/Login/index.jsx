@@ -44,6 +44,10 @@ const Login = ({ className, active }) => {
         token: response.data?.token,
         expiry: response.data?.expires,
         sub: response.data?.user?._id,
+        name: [
+          response.data?.user?.name?.first,
+          response.data?.user?.name?.last,
+        ].join(" "),
       });
 
       if (isAuthenticated()) {
