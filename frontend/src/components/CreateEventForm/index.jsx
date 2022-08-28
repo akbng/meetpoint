@@ -7,7 +7,7 @@ import { createEvent, getAllUsers } from "../../helper";
 import { isAuthenticated } from "../../utils";
 import styles from "./index.module.css";
 
-const CreateEventForm = ({ setIsOpen, event }) => {
+const CreateEventForm = ({ closeDialog, event }) => {
   const [value, setValue] = useState({
     name: event?.name || "",
     description: event?.description || "",
@@ -57,7 +57,7 @@ const CreateEventForm = ({ setIsOpen, event }) => {
         attendees: [],
       });
       setError(response.reason);
-      setIsOpen(false);
+      closeDialog();
     } catch (err) {
       console.error(err);
     } finally {
@@ -155,7 +155,7 @@ const CreateEventForm = ({ setIsOpen, event }) => {
             </button>
           </div>
         </form>
-        <button onClick={() => setIsOpen(false)}>
+        <button onClick={closeDialog}>
           Cancel <FaTimes />
         </button>
       </main>

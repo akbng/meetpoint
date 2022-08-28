@@ -2,16 +2,9 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
-import CreateEventForm from "../CreateEventForm";
-import ViewEvent from "../ViewEvent";
 import styles from "./index.module.css";
 
-const EventDialog = ({ isOpen, setIsOpen, eventId, setEventId }) => {
-  const closeDialog = () => {
-    setIsOpen(false);
-    setEventId("");
-  };
-
+const EventDialog = ({ isOpen, closeDialog, children }) => {
   return (
     <Transition show={isOpen} as={Fragment}>
       <Dialog onClose={closeDialog} className={styles.dialog_container}>
@@ -38,15 +31,7 @@ const EventDialog = ({ isOpen, setIsOpen, eventId, setEventId }) => {
         >
           <div className={styles.panel_container}>
             <Dialog.Panel className={styles.dialog_panel}>
-              {eventId ? (
-                <ViewEvent
-                  eventId={eventId}
-                  setEventId={setEventId}
-                  setIsOpen={setIsOpen}
-                />
-              ) : (
-                <CreateEventForm setIsOpen={setIsOpen} />
-              )}
+              {children}
               <div className={styles.close_button} onClick={closeDialog}>
                 <FaTimes />
               </div>

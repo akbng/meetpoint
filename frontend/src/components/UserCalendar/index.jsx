@@ -17,8 +17,8 @@ const UserCalendar = ({ className, events }) => {
       if (els.length > 0)
         return (
           <div>
-            {els.map((el) => (
-              <p>{el}</p>
+            {els.map((el, i) => (
+              <p key={i}>{el}</p>
             ))}
           </div>
         );
