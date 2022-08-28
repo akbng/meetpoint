@@ -72,3 +72,44 @@
 .border_button:hover {
   color: #115e59;
 }
+
+.logo {
+  width: 100%;
+  padding: 0.2rem 0.5rem;
+}
+
+.logo > svg {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.tabs {
+  width: 100%;
+  margin-top: 1.2rem;
+}
+
+.tab {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 18px;
+  margin: 4px 0;
+  text-align: left;
+  color: #3d3d3d;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 80ms ease-in;
+}
+
+.active_tab {
+  background-color: #b3b3b3;
+}
+
+.tab:hover:not(.active_tab) {
+  background-color: #d3d3d3;
+}
+
+.tab > svg {
+  margin-right: 0.5rem;
+  vertical-align: middle;
+}
