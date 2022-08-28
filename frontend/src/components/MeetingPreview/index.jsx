@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { AgoraVideoPlayer } from "agora-rtc-react";
 import AgoraRTC from "agora-rtc-sdk-ng";
 import Select from "react-select";
@@ -12,6 +13,7 @@ import {
 import styles from "./index.module.css";
 
 const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
+  const navigate = useNavigate();
   const [audioDevices, setAudioDevices] = useState([]);
   const [videoDevices, setVideoDevices] = useState([]);
   const [trackState, setTrackState] = useState({ audio: true, video: true });
@@ -41,6 +43,11 @@ const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
   const handleDeviceChange = (type) => async (option) => {
     if (type === "audio") await tracks[0].setDevice(option.value);
     if (type === "video") await tracks[1].setDevice(option.value);
+  };
+
+  const onCancel = () => {
+    if (tracks) tracks.forEach((track) => track.close());
+    navigate(-1);
   };
 
   return (
@@ -85,6 +92,15 @@ const MeetingPreview = ({ ready, tracks, token, setStartCall }) => {
             disabled={!ready || !token}
           >
             Join Call
+          </button>
+        </div>
+        <div>
+          <button
+            className={styles.button}
+            onClick={onCancel}
+            disabled={!tracks}
+          >
+            Cancel
           </button>
         </div>
       </aside>
