@@ -55,6 +55,14 @@ export const getUpcomingEvents = () =>
     },
   }).then((res) => res.json());
 
+export const getAllEvents = () =>
+  fetch(`${backendURL}/event/user/all`, {
+    method: "GET",
+    headers: {
+      Authorization: isAuthenticated().token,
+    },
+  }).then((res) => res.json());
+
 export const createEvent = (values) =>
   fetch(`${backendURL}/event`, {
     method: "POST",
