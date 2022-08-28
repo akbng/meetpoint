@@ -1,3 +1,9 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .dialog_title {
   font-size: 1.2rem;
   color: #4e4e4e;
@@ -8,6 +14,45 @@
   font-size: 0.9rem;
   color: var(--red);
   margin-bottom: 5px;
+}
+
+.form {
+  width: 100%;
+}
+
+.input_group {
+  margin: 0.6rem 0;
+}
+
+.input_group > input {
+  display: block;
+  margin-top: 0.4rem;
+  width: 100%;
+  min-width: 440px;
+  max-width: 440px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.2rem;
+  border: 1px solid #115e59;
+}
+
+.button {
+  display: inline;
+  padding: 0.4rem 0.8rem;
+  margin: 0.4rem 1.2rem;
+  background: #115e59;
+  color: #fff;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.button:first-child {
+  margin-left: 0;
+}
+
+.button > svg {
+  vertical-align: middle;
 }
 
 .color_swatch {

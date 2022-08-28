@@ -33,7 +33,7 @@ const CreateEventForm = ({ closeDialog, event }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!value.name || !value.description || !value.date || !value.time)
+    if (!value.name || !value.date || !value.time)
       return setError("Please Fill-In the required fields");
 
     setLoading(true);
@@ -88,13 +88,13 @@ const CreateEventForm = ({ closeDialog, event }) => {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1 className={styles.dialog_title}>Create Event</h1>
       <main className={styles.dialog_body}>
-        <form onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.error}>{error ? error : ""}</div>
-          <div>
-            <label htmlFor="eventName">Name: </label>
+          <div className={styles.input_group}>
+            <label htmlFor="eventName">Name*: </label>
             <input
               type="text"
               id="eventName"
@@ -102,7 +102,7 @@ const CreateEventForm = ({ closeDialog, event }) => {
               onChange={handleChange("name")}
             />
           </div>
-          <div>
+          <div className={styles.input_group}>
             <label htmlFor="eventDescription">Description: </label>
             <input
               type="text"
@@ -111,8 +111,8 @@ const CreateEventForm = ({ closeDialog, event }) => {
               onChange={handleChange("description")}
             />
           </div>
-          <div>
-            <label htmlFor="eventDate">Date: </label>
+          <div className={styles.input_group}>
+            <label htmlFor="eventDate">Date*: </label>
             <input
               type="date"
               id="eventDate"
@@ -120,8 +120,8 @@ const CreateEventForm = ({ closeDialog, event }) => {
               onChange={handleChange("date")}
             />
           </div>
-          <div>
-            <label htmlFor="eventTime">Time: </label>
+          <div className={styles.input_group}>
+            <label htmlFor="eventTime">Time*: </label>
             <input
               type="time"
               id="eventTime"
@@ -140,7 +140,7 @@ const CreateEventForm = ({ closeDialog, event }) => {
               )
             )}
           </div>
-          <div>
+          <div className={styles.input_group}>
             <label htmlFor="eventParticipants">Participants: </label>
             <Select
               id="eventParticipants"
@@ -150,14 +150,14 @@ const CreateEventForm = ({ closeDialog, event }) => {
             />
           </div>
           <div>
-            <button type="submit">
+            <button className={styles.button} type="submit">
               Save <FaSave />
+            </button>
+            <button className={styles.button} onClick={closeDialog}>
+              Cancel <FaTimes />
             </button>
           </div>
         </form>
-        <button onClick={closeDialog}>
-          Cancel <FaTimes />
-        </button>
       </main>
     </div>
   );
