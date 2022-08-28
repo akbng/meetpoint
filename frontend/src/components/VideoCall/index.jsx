@@ -1,6 +1,7 @@
 import AgoraRTC from "agora-rtc-sdk-ng";
 import AgoraRTM from "agora-rtm-sdk";
 import { useEffect, useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
@@ -71,8 +72,19 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
 
       const uid = await client.join(appId, channelName, token, null);
       console.log("My user id: ", uid);
-      if (tracks) await client.publish([tracks[0], tracks[1]]);
-      setStartCall(true);
+      if (tracks) {
+        let tracksToPublish = [];
+        if (tracks[0].enabled) tracksToPublish.push(tracks[0]);
+        if (tracks[1].enabled) tracksToPublish.push(tracks[1]);
+        if (tracksToPublish.length === 0) {
+          toast.error(
+            "Can not join with both audio & video disabled! Please Leave & Rejoin"
+          );
+          return;
+        }
+        await client.publish(tracksToPublish);
+        setStartCall(true);
+      }
     };
 
     const configRTM = async (channelName) => {
@@ -155,6 +167,7 @@ const VideoCall = ({ ready, tracks, token, setInCall }) => {
 
   return (
     <div className={styles.container}>
+      <Toaster />
       {ready && tracks && (
         <VideoCallControls
           setInCall={setInCall}
