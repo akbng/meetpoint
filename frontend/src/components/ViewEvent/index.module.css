@@ -1,0 +1,95 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dialog_title {
+  color: #232323;
+  font-size: 1.5rem;
+  margin: 0.8rem 0;
+}
+
+.dialog_body {
+  width: 100%;
+  height: 100%;
+}
+
+.name {
+  font-size: 1.8rem;
+  margin: 0.6rem 0;
+}
+
+.description {
+  font-size: 0.9rem;
+  margin: 0.6rem 0;
+}
+
+.date {
+  font-size: 1.2rem;
+  margin: 0.8rem 0;
+  font-weight: 600;
+  color: #454545;
+}
+
+.users {
+  width: 100%;
+  height: 250px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.users > h3 {
+  font-size: 1rem;
+  margin: 0.8rem 0;
+}
+
+.users svg {
+  margin-right: 0.4rem;
+}
+
+.user {
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  color: #646464;
+}
+
+.user > svg {
+  width: 30px;
+  height: 30px;
+}
+
+.date > svg {
+  vertical-align: middle;
+  margin-right: 0.8rem;
+}
+
+.red {
+  color: var(--red);
+}
+
+.orange {
+  color: var(--orange);
+}
+
+.yellow {
+  color: var(--yellow);
+}
+
+.green {
+  color: var(--green);
+}
+
+.blue {
+  color: var(--blue);
+}
+
+.pink {
+  color: var(--pink);
+}
+
+.purple {
+  color: var(--purple);
+}
