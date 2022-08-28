@@ -39,8 +39,8 @@ export const getRtcToken = ({ channelName }) =>
     },
   }).then((res) => res.json());
 
-export const getRtmToken = () =>
-  fetch(`${backendURL}/auth/generate/token/rtm`, {
+export const getRtmToken = (uid) =>
+  fetch(`${backendURL}/auth/generate/token/rtm?uid=${uid}`, {
     method: "GET",
     headers: {
       Authorization: isAuthenticated().token,
