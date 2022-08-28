@@ -15,6 +15,7 @@ import styles from "./me.module.css";
 import MeetingSection from "../../components/MeetingSection";
 import { logout } from "../../utils";
 import Logo from "../../Logo.svg";
+import Notes from "../../components/Notes";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -108,11 +109,25 @@ const Dashboard = () => {
       </aside>
       <main className={styles.main_section}>
         {activeTab === "events" && <MeetingSection />}
-        {activeTab === "notes" && <h1>Notes</h1>}
-        {activeTab === "reports" && <h1>Analytics</h1>}
-        {activeTab === "recordings" && <h1>Recordings</h1>}
-        {activeTab === "billing" && <h1>Billing &amp; Usabe</h1>}
-        {activeTab === "account" && <h1>Accounts</h1>}
+        {activeTab === "notes" && <Notes />}
+        {activeTab === "reports" && (
+          <div className={styles.disabled_section}>
+            Analytics Coming Soon...
+          </div>
+        )}
+        {activeTab === "recordings" && (
+          <div className={styles.disabled_section}>
+            Recordings Coming Soon...
+          </div>
+        )}
+        {activeTab === "billing" && (
+          <div className={styles.disabled_section}>
+            Billing &amp; Usage Coming Soon...
+          </div>
+        )}
+        {activeTab === "account" && (
+          <div className={styles.disabled_section}>Accounts Coming Soon...</div>
+        )}
       </main>
     </div>
   );
