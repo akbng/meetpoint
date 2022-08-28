@@ -1,0 +1,112 @@
+.container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.header {
+  width: 100%;
+  height: 10%;
+  display: flex;
+}
+
+.tab {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  color: #454545;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+.tab:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.tab_selected {
+  background-color: #a4a4a4;
+}
+
+.notes {
+  width: 100%;
+  height: 90%;
+  background: #ddd;
+  padding: 0.8rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.8rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.notes_empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  color: #b3b3b3;
+}
+
+.notes::-webkit-scrollbar {
+  display: none;
+}
+
+.note {
+  padding: 0.5rem 1.2rem;
+  min-height: 200px;
+  background-color: #fefefe;
+  border-radius: 0.6rem;
+  position: relative;
+  color: #232323;
+  overflow: hidden;
+}
+
+.note > h1 {
+  font-size: 2rem;
+  margin: 0.5rem 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.note > h2 {
+  font-size: 1.6rem;
+  margin: 0.5rem 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.note > h3 {
+  font-size: 1.2rem;
+  margin: 0.5rem 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.note > p {
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+  word-break: break-all;
+}
+
+.icon {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  width: 50px;
+  height: 50px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.icon > svg {
+  width: 100%;
+  height: 100%;
+}
