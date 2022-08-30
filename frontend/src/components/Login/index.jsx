@@ -25,6 +25,8 @@ const Login = ({ className, active }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const loader = toast.loading("...loading");
+    setError("");
 
     if (email === "" || password === "") {
       setError("Please fill all fields");
@@ -60,6 +62,7 @@ const Login = ({ className, active }) => {
       setError(err.reason || err.message);
     } finally {
       setLoading(false);
+      toast.dismiss(loader);
     }
   };
 
@@ -95,7 +98,7 @@ const Login = ({ className, active }) => {
           Forgot your password?
         </a>
         <button className={styles.button} type="submit" disabled={loading}>
-          Sign In
+          Log In
         </button>
       </form>
     </div>

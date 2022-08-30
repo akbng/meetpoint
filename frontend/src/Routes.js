@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes as Switch } from "react-router-dom";
+import { HashRouter, Route, Routes as Switch } from "react-router-dom";
 
 import Home from "./pages";
 import Auth from "./pages/auth/user";
@@ -17,7 +17,7 @@ const protect = (Component) => (
 
 const Routes = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route path="/" element={<Home />} />
         <Route path="/auth/user" element={<Auth />} />
@@ -27,7 +27,7 @@ const Routes = () => {
         <Route path="/meeting/leave/call" element={<LeaveCall />} />
         <Route path="*" element={<Error404 />} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

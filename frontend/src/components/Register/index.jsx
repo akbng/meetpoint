@@ -27,6 +27,8 @@ const Register = ({ className, active }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    const loader = toast.loading("...loading");
+    setError("");
 
     if (fullName === "" || email === "" || password === "") {
       setError("Please fill all fields");
@@ -62,6 +64,7 @@ const Register = ({ className, active }) => {
       setError(err.reason);
     } finally {
       setLoading(false);
+      toast.dismiss(loader);
     }
   };
 

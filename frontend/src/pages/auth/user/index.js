@@ -46,7 +46,7 @@ const Auth = () => {
                 id="signIn"
                 onClick={() => setRightPanelActive(false)}
               >
-                Sign In
+                Log In
               </button>
             </div>
             <div className={`${styles.overlay_panel} ${styles.overlay_right}`}>
@@ -59,7 +59,7 @@ const Auth = () => {
                 id="signUp"
                 onClick={() => setRightPanelActive(true)}
               >
-                Sign Up
+                Register
               </button>
             </div>
           </div>

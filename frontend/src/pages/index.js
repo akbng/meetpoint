@@ -23,11 +23,11 @@ const Home = () => {
       </nav>
       <header className={styles.header}>
         <h1 className={styles.title}>
-          Improve productivity withquality video meetings, work on the go!
+          Unproductive Video Calls Feels Like Wasting Your Time?
         </h1>
         <h3 className={styles.subtitle}>
-          Quality video chat for businesses,High resolution video and audio
-          output. Track your time on the go
+          With MeetPoint you can Work, Meet, Collaborate and Manage Products on
+          the go.
         </h3>
         <div className={styles.buttons}>
           <Link to="/auth/user?mode=register" className={styles.button}>
@@ -36,13 +36,13 @@ const Home = () => {
         </div>
         <main className={styles.mockup}>
           <div className={styles.img}>
-            <img src="/OfficeLady.png" alt="Lady holding suitcase" />
+            <img src="./OfficeLady.png" alt="Lady holding suitcase" />
           </div>
           <div className={styles.img}>
-            <img src="/Man.png" alt="Business man talking with arms open" />
+            <img src="./Man.png" alt="Business man talking with arms open" />
           </div>
           <div className={styles.img}>
-            <img src="/TabletLady.png" alt="Girl holding tablet" />
+            <img src="./TabletLady.png" alt="Girl holding tablet" />
           </div>
         </main>
       </header>

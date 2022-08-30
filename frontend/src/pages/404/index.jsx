@@ -7,7 +7,7 @@ import styles from "./index.module.css";
 const Error404 = () => {
   return (
     <div className={styles.container}>
-      <img src="/404.png" alt="lady conveying page not found 404 message" />
+      <img src="./404.png" alt="lady conveying page not found 404 message" />
       <Link
         className={styles.button}
         to={isAuthenticated() ? "/dashboard/me" : "/"}
