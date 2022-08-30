@@ -26,15 +26,16 @@ const Register = ({ className, active }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    const loader = toast.loading("...loading");
-    setError("");
 
     if (fullName === "" || email === "" || password === "") {
       setError("Please fill all fields");
       setLoading(false);
       return;
     }
+
+    setLoading(true);
+    const loader = toast.loading("...loading");
+    setError("");
 
     try {
       const response = await registerUser({ fullName, email, password, phone });
