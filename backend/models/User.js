@@ -68,8 +68,14 @@ userSchema
     return this.name.first + " " + this.name?.last;
   })
   .set(function (fullName) {
-    this.name.first = fullName.trim().substr(0, fullName.indexOf(" "));
-    this.name.last = fullName.trim().substr(fullName.lastIndexOf(" ") + 1);
+    this.name.first =
+      fullName.indexOf(" ") !== -1
+        ? fullName.trim().substr(0, fullName.indexOf(" "))
+        : fullName;
+    this.name.last =
+      fullName.indexOf(" ") !== -1
+        ? fullName.trim().substr(fullName.lastIndexOf(" ") + 1)
+        : undefined;
   });
 
 userSchema
